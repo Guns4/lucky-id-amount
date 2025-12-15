@@ -1,11 +1,5 @@
 import { useState, useCallback } from "react";
-import {
-  Shuffle,
-  Settings2,
-  Zap,
-  Banknote,
-  Sparkles
-} from "lucide-react";
+import { Shuffle, Settings2, Zap, Banknote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,9 +10,10 @@ import {
   generateMultipleAmounts,
   AMOUNT_PRESETS,
   type AmountCategory,
-  type GeneratedAmount
+  type GeneratedAmount,
 } from "@/lib/generators";
 import { cn } from "@/lib/utils";
+import { openSmartlink } from "@/lib/smartlink";
 
 export function AmountGenerator() {
   const { t } = useLanguage();
@@ -28,7 +23,8 @@ export function AmountGenerator() {
   const [showSettings, setShowSettings] = useState(false);
 
   // Options
-  const [category, setCategory] = useState<AmountCategory["type"]>("lucky");
+  const [category, setCategory] =
+    useState<AmountCategory["type"]>("lucky");
   const [minAmount, setMinAmount] = useState("50000");
   const [maxAmount, setMaxAmount] = useState("1000000");
   const [includeDecimals, setIncludeDecimals] = useState(false);
@@ -37,33 +33,24 @@ export function AmountGenerator() {
   const CATEGORIES: {
     value: AmountCategory["type"];
     label: string;
-    icon: string;
+    icon: React.ReactNode;
   }[] = [
-    { value: "lucky", label: "Lucky", icon: "🍀" },
-    { value: "unique-odd", label: "Unique", icon: "✨" },
-    { value: "psychological", label: "Psychology", icon: "🧠" },
-    { value: "round-beautiful", label: "Premium", icon: "💎" },
-    { value: "balanced", label: "Balanced", icon: "⚖️" }
+    { value: "lucky", label: t("lucky"), icon: "🍀" },
+    { value: "unique-odd", label: t("uniqueOdd"), icon: "✨" },
+    { value: "psychological", label: t("psychological"), icon: "🧠" },
+    { value: "round-beautiful", label: t("roundBeautiful"), icon: "💎" },
+    { value: "balanced", label: t("balanced"), icon: "⚖️" },
   ];
 
-  const PRESET_LABELS: Record<string, string> = {
-    lucky: "Lucky Deposit",
-    psychological: "Psychological",
-    subtle: "Aman & Natural",
-    premium: "VIP Round"
+  const PRESETS_LABELS: Record<string, string> = {
+    lucky: t("luckyDeposit"),
+    psychological: t("psychological"),
+    subtle: t("subtleSafe"),
+    premium: t("premiumRound"),
   };
 
-  const formatInputAmount = (value: string) => {
-    const num = value.replace(/\D/g, "");
-    return num ? parseInt(num).toLocaleString("id-ID") : "";
-  };
-
+  // 🔥 Generate with micro-delay (CTR & monetization friendly)
   const generate = useCallback(() => {
-    // Clarity tracking
-    if (typeof window !== "undefined" && (window as any).clarity) {
-      (window as any).clarity("event", "generate_amount_click");
-    }
-
     setIsGenerating(true);
 
     setTimeout(() => {
@@ -75,14 +62,14 @@ export function AmountGenerator() {
           minAmount: min,
           maxAmount: max,
           category,
-          includeDecimals
+          includeDecimals,
         },
         bulkCount
       );
 
       setResults(amounts);
       setIsGenerating(false);
-    }, 300);
+    }, 500);
   }, [category, minAmount, maxAmount, includeDecimals, bulkCount]);
 
   const applyPreset = (presetId: string) => {
@@ -94,14 +81,17 @@ export function AmountGenerator() {
     if (presetId === "premium") {
       setMinAmount("500000");
       setMaxAmount("5000000");
-    }
-
-    if (presetId === "subtle") {
+    } else if (presetId === "subtle") {
       setMinAmount("100000");
       setMaxAmount("500000");
     }
 
     generate();
+  };
+
+  const formatInputAmount = (value: string) => {
+    const num = value.replace(/\D/g, "");
+    return num ? parseInt(num).toLocaleString("id-ID") : "";
   };
 
   return (
@@ -117,7 +107,7 @@ export function AmountGenerator() {
             className="text-xs"
           >
             <Zap className="w-3 h-3 mr-1" />
-            {PRESET_LABELS[preset.id] || preset.label}
+            {PRESETS_LABELS[preset.id] || preset.label}
           </Button>
         ))}
       </div>
@@ -129,7 +119,7 @@ export function AmountGenerator() {
             key={c.value}
             onClick={() => setCategory(c.value)}
             className={cn(
-              "glass-card rounded-lg p-3 text-center transition-all",
+              "glass-card rounded-lg p-3 text-center transition-all duration-200 hover:border-primary/50",
               category === c.value && "border-primary gold-glow"
             )}
           >
@@ -144,7 +134,7 @@ export function AmountGenerator() {
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label className="text-xs text-muted-foreground">
-              Minimum Deposit
+              {t("minimum")}
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
@@ -154,14 +144,14 @@ export function AmountGenerator() {
                 value={formatInputAmount(minAmount)}
                 onChange={(e) => setMinAmount(e.target.value)}
                 className="pl-10 font-mono"
-                placeholder="50,000"
+                placeholder="50.000"
               />
             </div>
           </div>
 
           <div className="space-y-2">
             <Label className="text-xs text-muted-foreground">
-              Maximum Deposit
+              {t("maximum")}
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
@@ -171,7 +161,7 @@ export function AmountGenerator() {
                 value={formatInputAmount(maxAmount)}
                 onChange={(e) => setMaxAmount(e.target.value)}
                 className="pl-10 font-mono"
-                placeholder="1,000,000"
+                placeholder="1.000.000"
               />
             </div>
           </div>
@@ -184,19 +174,19 @@ export function AmountGenerator() {
             onClick={() => setShowSettings(!showSettings)}
           >
             <Settings2 className="w-4 h-4 mr-2" />
-            {showSettings ? "Hide" : "Advanced"}
+            {showSettings ? t("hide") : t("more")}
           </Button>
 
           <div className="flex items-center gap-2">
             <Label className="text-xs text-muted-foreground">
-              Total Results
+              {t("generateCount")}
             </Label>
             <Input
               type="number"
               value={bulkCount}
               onChange={(e) =>
                 setBulkCount(
-                  Math.min(10, Math.max(1, parseInt(e.target.value) || 5))
+                  Math.min(10, Math.max(1, Number(e.target.value) || 5))
                 )
               }
               className="w-16 font-mono text-center"
@@ -206,7 +196,6 @@ export function AmountGenerator() {
           </div>
         </div>
 
-        {/* Advanced Settings */}
         {showSettings && (
           <div className="mt-4 pt-4 border-t border-border animate-fade-in">
             <div className="flex items-center gap-2">
@@ -215,43 +204,41 @@ export function AmountGenerator() {
                 onCheckedChange={setIncludeDecimals}
               />
               <Label className="text-sm">
-                Include Decimal (contoh: 888.88)
+                {t("includeDecimals")}
               </Label>
             </div>
           </div>
         )}
       </div>
 
-      {/* CTA */}
+      {/* 🔥 PRIMARY CTA */}
       <Button
         variant="gold"
         size="xl"
         onClick={generate}
         disabled={isGenerating}
-        className="w-full text-lg"
+        className="w-full"
       >
-        {/* 🔥 Native Ad - Hot Click Zone */}
-<div className="mt-4 mb-2">
-  <p className="text-[10px] text-muted-foreground text-center mb-1">
-    Sponsored
-  </p>
-  <NativeBanner />
-</div>
-
         {isGenerating ? (
           <Shuffle className="w-5 h-5 animate-spin" />
         ) : (
-          <Sparkles className="w-5 h-5" />
+          <Banknote className="w-5 h-5" />
         )}
-        <span className="ml-2">Generate Nominal Gacor</span>
+        <span className="ml-2">🎯 Generate Lucky Amount Sekarang</span>
       </Button>
 
       {/* Results */}
       {results.length > 0 && (
         <div className="space-y-3 animate-fade-in">
-          <h3 className="text-sm text-muted-foreground">
-            Nominal siap pakai (psikologis & hoki)
-          </h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-muted-foreground">
+              {t("generatedAmounts")}
+            </h3>
+            <span className="text-xs text-muted-foreground">
+              {results.length} {t("results")}
+            </span>
+          </div>
+
           <div className="grid gap-3">
             {results.map((result, index) => (
               <GeneratedItem
@@ -262,12 +249,34 @@ export function AmountGenerator() {
                 label={result.category}
                 highlight={index === 0}
                 className="animate-slide-up"
-                style={{ animationDelay: `${index * 50}ms` }}
+                style={{ animationDelay: `${index * 60}ms` }}
               />
             ))}
           </div>
         </div>
       )}
+
+      {/* 💰 Smartlink Fallback (RPM Booster) */}
+      {results.length > 0 && (
+        <div className="mt-6 text-center">
+          <button
+            onClick={openSmartlink}
+            className="text-xs text-muted-foreground hover:text-primary transition"
+          >
+            🎁 Lihat rekomendasi saldo populer hari ini →
+          </button>
+        </div>
+      )}
+
+      {/* 🔗 SEO Internal Link */}
+      <div className="mt-10 text-center">
+        <a
+          href="/lucky-amount-generator"
+          className="text-sm text-primary hover:underline"
+        >
+          Lucky Amount Generator Indonesia →
+        </a>
+      </div>
     </div>
   );
 }

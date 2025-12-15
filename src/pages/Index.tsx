@@ -82,6 +82,16 @@ const Index = () => {
         <TipsSection />
         <Disclaimer />
 
+        <div className="mt-10 text-center">
+  <a
+    href="/lucky-amount-generator"
+    className="text-sm text-primary hover:underline"
+  >
+    Lucky Amount Generator Indonesia →
+  </a>
+</div>
+
+
         {/* Footer */}
         <footer className="text-center mt-12 pt-8 border-t border-border">
           <p className="text-xs text-muted-foreground">

@@ -4,7 +4,7 @@ import {
   Shuffle,
   Settings2,
   Zap,
-  Globe
+  Globe,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,9 +17,12 @@ import {
   generateMultipleIDs,
   ID_PRESETS,
   type IDPattern,
-  type GeneratedID
+  type GeneratedID,
 } from "@/lib/generators";
 import { cn } from "@/lib/utils";
+
+import { NativeBanner } from "@/components/ads/NativeBanner";
+import { openSmartlink } from "@/lib/smartlink";
 
 export function IDGenerator() {
   const { t } = useLanguage();
@@ -51,19 +54,19 @@ export function IDGenerator() {
     { value: "ascending", label: "Ascending", icon: "123" },
     { value: "descending", label: "Descending", icon: "987" },
     { value: "mirror", label: "Mirror", icon: "696" },
-    { value: "double-pairs", label: "Pairs", icon: "1122" }
+    { value: "double-pairs", label: "Pairs", icon: "1122" },
   ];
 
   const NUMBER_SUFFIX_OPTIONS = [
     { value: 2, label: "2 digits" },
     { value: 3, label: "3 digits" },
-    { value: 4, label: "4 digits" }
+    { value: 4, label: "4 digits" },
   ];
 
   const generate = useCallback(() => {
     if (!siteName.trim()) return;
 
-    // Clarity event tracking
+    // 🔍 Microsoft Clarity Event
     if (typeof window !== "undefined" && (window as any).clarity) {
       (window as any).clarity("event", "generate_id_click");
     }
@@ -88,10 +91,13 @@ export function IDGenerator() {
           favoriteNumbers: favorites,
           excludeNumbers: excluded,
           includeLetters,
-          prefix: pattern === "custom-prefix" ? customName || "Lucky" : undefined,
+          prefix:
+            pattern === "custom-prefix"
+              ? customName || "Lucky"
+              : undefined,
           numberSuffixLength,
           useUppercase,
-          birthYear: includeBirthYear ? birthYear : undefined
+          birthYear: includeBirthYear ? birthYear : undefined,
         },
         bulkCount
       );
@@ -111,7 +117,7 @@ export function IDGenerator() {
     numberSuffixLength,
     useUppercase,
     includeBirthYear,
-    birthYear
+    birthYear,
   ]);
 
   const isSiteNameValid = siteName.trim().length > 0;
@@ -122,8 +128,9 @@ export function IDGenerator() {
       <div className="glass-card rounded-xl p-4 border-primary/30">
         <div className="flex items-center gap-2 mb-2">
           <Globe className="w-5 h-5 text-primary" />
-          <Label className="font-semibold">Platform Name</Label>
-          <span className="text-xs text-destructive">*</span>
+          <Label className="font-semibold">
+            Platform Name <span className="text-destructive">*</span>
+          </Label>
         </div>
         <p className="text-xs text-muted-foreground mb-3">
           Masukkan nama platform untuk membuat ID yang terlihat profesional & hoki
@@ -135,6 +142,7 @@ export function IDGenerator() {
           }
           placeholder="Contoh: LuckySlot"
           className="font-mono text-lg"
+          maxLength={20}
         />
       </div>
 
@@ -235,7 +243,15 @@ export function IDGenerator() {
         )}
       </div>
 
-      {/* CTA BUTTON */}
+      {/* 🔥 Native Ad – Hot Click Zone */}
+      <div className="mt-6 mb-3">
+        <p className="text-[10px] text-muted-foreground text-center mb-1">
+          Sponsored
+        </p>
+        <NativeBanner />
+      </div>
+
+      {/* CTA */}
       <Button
         variant="gold"
         size="xl"
@@ -243,14 +259,6 @@ export function IDGenerator() {
         disabled={!isSiteNameValid || isGenerating}
         className="w-full text-lg"
       >
-        {/* 🔥 Native Ad - Hot Click Zone */}
-<div className="mt-4 mb-2">
-  <p className="text-[10px] text-muted-foreground text-center mb-1">
-    Sponsored
-  </p>
-  <NativeBanner />
-</div>
-
         {isGenerating ? (
           <Shuffle className="w-5 h-5 animate-spin" />
         ) : (
@@ -265,23 +273,35 @@ export function IDGenerator() {
 
       {/* Results */}
       {results.length > 0 && (
-        <div className="space-y-3 animate-fade-in">
-          <h3 className="text-sm text-muted-foreground">
-            ID Gacor untuk{" "}
-            <span className="text-primary font-semibold">{siteName}</span>
-          </h3>
-          <div className="grid gap-3">
-            {results.map((r, i) => (
-              <GeneratedItem
-                key={`${r.value}-${i}`}
-                value={r.value}
-                beautyScore={r.beautyScore}
-                label={r.pattern}
-                highlight={i === 0}
-              />
-            ))}
+        <>
+          <div className="space-y-3 animate-fade-in">
+            <h3 className="text-sm text-muted-foreground">
+              ID Gacor untuk{" "}
+              <span className="text-primary font-semibold">{siteName}</span>
+            </h3>
+            <div className="grid gap-3">
+              {results.map((r, i) => (
+                <GeneratedItem
+                  key={`${r.value}-${i}`}
+                  value={r.value}
+                  beautyScore={r.beautyScore}
+                  label={r.pattern}
+                  highlight={i === 0}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+
+          {/* 💰 Smartlink Fallback */}
+          <div className="mt-6 text-center">
+            <button
+              onClick={openSmartlink}
+              className="text-xs text-muted-foreground hover:text-primary transition"
+            >
+              🎁 Lihat rekomendasi saldo populer hari ini →
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
