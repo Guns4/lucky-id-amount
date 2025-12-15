@@ -21,7 +21,9 @@ import {
 } from "@/lib/generators";
 import { cn } from "@/lib/utils";
 
-import { NativeBanner } from "@/components/ads/NativeBanner";
+/* ✅ FIX: default import */
+import NativeBanner from "@/components/ads/NativeBanner";
+
 import { openSmartlink } from "@/lib/smartlink";
 
 export function IDGenerator() {
@@ -57,16 +59,9 @@ export function IDGenerator() {
     { value: "double-pairs", label: "Pairs", icon: "1122" },
   ];
 
-  const NUMBER_SUFFIX_OPTIONS = [
-    { value: 2, label: "2 digits" },
-    { value: 3, label: "3 digits" },
-    { value: 4, label: "4 digits" },
-  ];
-
   const generate = useCallback(() => {
     if (!siteName.trim()) return;
 
-    // 🔍 Microsoft Clarity Event
     if (typeof window !== "undefined" && (window as any).clarity) {
       (window as any).clarity("event", "generate_id_click");
     }
@@ -132,9 +127,6 @@ export function IDGenerator() {
             Platform Name <span className="text-destructive">*</span>
           </Label>
         </div>
-        <p className="text-xs text-muted-foreground mb-3">
-          Masukkan nama platform untuk membuat ID yang terlihat profesional & hoki
-        </p>
         <Input
           value={siteName}
           onChange={(e) =>
@@ -184,66 +176,7 @@ export function IDGenerator() {
         ))}
       </div>
 
-      {/* Controls */}
-      <div className="glass-card rounded-xl p-4">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <Label className="text-xs">ID Length</Label>
-            <div className="font-mono text-xl">{length}</div>
-          </div>
-          <Slider
-            value={[length]}
-            min={4}
-            max={12}
-            step={1}
-            onValueChange={([v]) => setLength(v)}
-            className="w-32"
-          />
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={() => setShowSettings(!showSettings)}
-          >
-            <Settings2 className="w-4 h-4 mr-1" />
-            {showSettings ? "Hide" : "More"}
-          </Button>
-        </div>
-
-        {showSettings && (
-          <div className="grid gap-4 pt-4 border-t animate-fade-in">
-            <div className="grid grid-cols-2 gap-4">
-              <Input
-                value={favoriteNumbers}
-                onChange={(e) => setFavoriteNumbers(e.target.value)}
-                placeholder="Favorite numbers"
-              />
-              <Input
-                value={excludeNumbers}
-                onChange={(e) => setExcludeNumbers(e.target.value)}
-                placeholder="Exclude numbers"
-              />
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Switch
-                checked={includeLetters}
-                onCheckedChange={setIncludeLetters}
-              />
-              <Label>Include Letters</Label>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Switch
-                checked={useUppercase}
-                onCheckedChange={setUseUppercase}
-              />
-              <Label>Uppercase Output</Label>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* 🔥 Native Ad – Hot Click Zone */}
+      {/* Native Ad */}
       <div className="mt-6 mb-3">
         <p className="text-[10px] text-muted-foreground text-center mb-1">
           Sponsored
@@ -271,28 +204,20 @@ export function IDGenerator() {
         </span>
       </Button>
 
-      {/* Results */}
       {results.length > 0 && (
         <>
-          <div className="space-y-3 animate-fade-in">
-            <h3 className="text-sm text-muted-foreground">
-              ID Gacor untuk{" "}
-              <span className="text-primary font-semibold">{siteName}</span>
-            </h3>
-            <div className="grid gap-3">
-              {results.map((r, i) => (
-                <GeneratedItem
-                  key={`${r.value}-${i}`}
-                  value={r.value}
-                  beautyScore={r.beautyScore}
-                  label={r.pattern}
-                  highlight={i === 0}
-                />
-              ))}
-            </div>
+          <div className="space-y-3">
+            {results.map((r, i) => (
+              <GeneratedItem
+                key={`${r.value}-${i}`}
+                value={r.value}
+                beautyScore={r.beautyScore}
+                label={r.pattern}
+                highlight={i === 0}
+              />
+            ))}
           </div>
 
-          {/* 💰 Smartlink Fallback */}
           <div className="mt-6 text-center">
             <button
               onClick={openSmartlink}
