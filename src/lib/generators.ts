@@ -44,7 +44,24 @@ export interface GeneratedAmount {
 
 // Lucky numbers commonly used
 const LUCKY_NUMBERS = [7, 8, 9];
-const LUCKY_LETTER_COMBOS = ['WIN', 'LUCK', 'GOLD', 'VIP', 'ACE', 'MAX', 'PRO'];
+
+// Name bases for ID generation - variety of cool names
+const ID_NAMES = [
+  // Dragons & Mythical
+  'Naga', 'Dragon', 'Phoenix', 'Titan', 'Zeus', 'Thor', 'Odin', 'Hades',
+  // Winners & Champions
+  'King', 'Queen', 'Sultan', 'Boss', 'Chief', 'Master', 'Legend', 'Hero',
+  // Luck & Fortune
+  'Lucky', 'Fortune', 'Gold', 'Diamond', 'Crown', 'Royal', 'Elite', 'Prime',
+  // Power
+  'Power', 'Storm', 'Thunder', 'Blaze', 'Fury', 'Ace', 'Max', 'Pro',
+  // Cool names
+  'Viper', 'Cobra', 'Wolf', 'Tiger', 'Lion', 'Eagle', 'Shark', 'Hawk',
+  // Gaming vibes
+  'Gamer', 'Ninja', 'Sniper', 'Hunter', 'Raider', 'Viking', 'Samurai', 'Ronin',
+  // VIP style
+  'VIP', 'MVP', 'Star', 'Flash', 'Bolt', 'Blitz', 'Nova', 'Apex',
+];
 
 function getRandomFromArray<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -129,20 +146,29 @@ function generateDoublePairsPattern(length: number, favorites: number[], exclude
   return result.slice(0, length);
 }
 
-function generateLuckyCombo(length: number, includeLetters: boolean): string {
-  if (includeLetters && length >= 4) {
-    const prefix = getRandomFromArray(LUCKY_LETTER_COMBOS).slice(0, Math.min(3, length - 1));
-    const numLength = length - prefix.length;
-    const numbers = LUCKY_NUMBERS.slice(0, numLength).map(n => n.toString()).join('');
-    return prefix + numbers.padEnd(numLength, '7');
+function generateNameBasedID(favorites: number[], exclude: number[]): string {
+  const name = getRandomFromArray(ID_NAMES);
+  const numCount = Math.random() > 0.5 ? 2 : 3; // 2 or 3 numbers
+  
+  const available = favorites.length > 0 
+    ? favorites.filter(n => !exclude.includes(n))
+    : LUCKY_NUMBERS.filter(n => !exclude.includes(n));
+  
+  let numbers = '';
+  for (let i = 0; i < numCount; i++) {
+    if (available.length > 0) {
+      numbers += getRandomFromArray(available).toString();
+    } else {
+      numbers += getRandomFromArray(LUCKY_NUMBERS).toString();
+    }
   }
   
-  // All lucky numbers
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += getRandomFromArray(LUCKY_NUMBERS).toString();
-  }
-  return result;
+  return name + numbers;
+}
+
+function generateLuckyCombo(favorites: number[], exclude: number[]): string {
+  // Now uses name-based generation
+  return generateNameBasedID(favorites, exclude);
 }
 
 function calculateIDBeautyScore(id: string): number {
@@ -206,8 +232,8 @@ export function generateID(options: IDGeneratorOptions): GeneratedID {
       pattern = 'Double Pairs';
       break;
     case 'lucky-combo':
-      value = generateLuckyCombo(options.length, options.includeLetters);
-      pattern = 'Lucky Combo';
+      value = generateLuckyCombo(options.favoriteNumbers, options.excludeNumbers);
+      pattern = 'Lucky Name';
       break;
     case 'custom-prefix':
       const suffix = generateRepeatingPattern(
