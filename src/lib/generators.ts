@@ -236,13 +236,23 @@ export function generateID(options: IDGeneratorOptions): GeneratedID {
       pattern = 'Lucky Name';
       break;
     case 'custom-prefix':
-      const suffix = generateRepeatingPattern(
-        Math.max(1, options.length - (options.prefix?.length || 0)),
-        options.favoriteNumbers,
-        options.excludeNumbers
-      );
-      value = (options.prefix || '') + suffix;
-      pattern = 'Custom Prefix';
+      // Use custom prefix with lucky numbers
+      const customPrefix = options.prefix || 'Lucky';
+      const numCount = Math.random() > 0.5 ? 2 : 3;
+      const available = options.favoriteNumbers.length > 0 
+        ? options.favoriteNumbers.filter(n => !options.excludeNumbers.includes(n))
+        : LUCKY_NUMBERS.filter(n => !options.excludeNumbers.includes(n));
+      
+      let customNumbers = '';
+      for (let i = 0; i < numCount; i++) {
+        if (available.length > 0) {
+          customNumbers += getRandomFromArray(available).toString();
+        } else {
+          customNumbers += getRandomFromArray(LUCKY_NUMBERS).toString();
+        }
+      }
+      value = customPrefix + customNumbers;
+      pattern = 'Custom Name';
       break;
     default:
       value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers);

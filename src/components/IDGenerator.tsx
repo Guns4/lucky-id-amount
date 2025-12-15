@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils';
 
 const PATTERNS: { value: IDPattern; label: string; icon: string }[] = [
   { value: 'lucky-combo', label: 'Names', icon: 'Naga88' },
+  { value: 'custom-prefix', label: 'Custom', icon: 'You77' },
   { value: 'repeating', label: 'Repeating', icon: '888' },
   { value: 'ascending', label: 'Ascending', icon: '123' },
   { value: 'descending', label: 'Descending', icon: '987' },
@@ -35,6 +36,7 @@ export function IDGenerator() {
   const [excludeNumbers, setExcludeNumbers] = useState('4');
   const [includeLetters, setIncludeLetters] = useState(true);
   const [prefix, setPrefix] = useState('');
+  const [customName, setCustomName] = useState('');
   const [bulkCount, setBulkCount] = useState(5);
 
   const generate = useCallback(() => {
@@ -58,13 +60,13 @@ export function IDGenerator() {
         favoriteNumbers: favorites,
         excludeNumbers: excluded,
         includeLetters,
-        prefix: pattern === 'custom-prefix' ? prefix : undefined,
+        prefix: pattern === 'custom-prefix' ? (customName || 'Lucky') : undefined,
       }, bulkCount);
       
       setResults(ids);
       setIsGenerating(false);
     }, 300);
-  }, [length, pattern, favoriteNumbers, excludeNumbers, includeLetters, prefix, bulkCount]);
+  }, [length, pattern, favoriteNumbers, excludeNumbers, includeLetters, customName, bulkCount]);
 
   const applyPreset = (presetId: string) => {
     const preset = ID_PRESETS.find(p => p.id === presetId);
@@ -100,7 +102,7 @@ export function IDGenerator() {
       </div>
 
       {/* Pattern Selection */}
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+      <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
         {PATTERNS.map((p) => (
           <button
             key={p.value}
@@ -110,11 +112,27 @@ export function IDGenerator() {
               pattern === p.value && 'border-primary gold-glow'
             )}
           >
-            <div className="font-mono text-lg font-semibold text-primary">{p.icon}</div>
+            <div className="font-mono text-sm sm:text-lg font-semibold text-primary">{p.icon}</div>
             <div className="text-xs text-muted-foreground mt-1">{p.label}</div>
           </button>
         ))}
       </div>
+
+      {/* Custom Name Input - shown when custom-prefix is selected */}
+      {pattern === 'custom-prefix' && (
+        <div className="glass-card rounded-xl p-4 animate-fade-in">
+          <Label htmlFor="customName" className="text-sm font-medium">Your Custom Name</Label>
+          <p className="text-xs text-muted-foreground mb-3">Enter your name or nickname, lucky numbers will be added automatically</p>
+          <Input
+            id="customName"
+            value={customName}
+            onChange={(e) => setCustomName(e.target.value.replace(/[^a-zA-Z]/g, '').slice(0, 10))}
+            placeholder="e.g. Dewa, Raja, YourName"
+            className="font-mono text-lg"
+            maxLength={10}
+          />
+        </div>
+      )}
 
       {/* Quick Controls */}
       <div className="glass-card rounded-xl p-4">
