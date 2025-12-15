@@ -7,6 +7,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TipsIdCantik from "./pages/TipsIdCantik";
+import DepositGacorSEO from "./pages/DepositGacorSEO";
+
 
 const queryClient = new QueryClient();
 
