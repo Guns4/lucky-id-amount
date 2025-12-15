@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Hash, Banknote } from "lucide-react";
 import { Header } from "@/components/Header";
 import { IDGenerator } from "@/components/IDGenerator";
@@ -8,7 +8,11 @@ import { TipsSection } from "@/components/TipsSection";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import NativeBanner from "@/components/ads/NativeBanner";
+import dynamic from "next/dynamic";
+
+const NativeBanner = dynamic(() => import("@/components/ads/NativeBanner"), {
+  ssr: false,
+});
 
 type TabType = "id" | "amount";
 
@@ -66,9 +70,9 @@ const Index = () => {
         </div>
 
         {/* Generator */}
-        <div className="animate-fade-in">
+        <Suspense fallback={<div className="text-center py-8">Loading...</div>}>
           {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
-        </div>
+        </Suspense>
 
         {/* Native Ad - HOT AREA */}
         <div className="my-8">
@@ -83,14 +87,10 @@ const Index = () => {
         <Disclaimer />
 
         <div className="mt-10 text-center">
-  <a
-    href="/lucky-amount-generator"
-    className="text-sm text-primary hover:underline"
-  >
-    Lucky Amount Generator Indonesia →
-  </a>
-</div>
-
+          <Link href="/lucky-amount-generator" className="text-sm text-primary hover:underline">
+            Lucky Amount Generator Indonesia →
+          </Link>
+        </div>
 
         {/* Footer */}
         <footer className="text-center mt-12 pt-8 border-t border-border">
