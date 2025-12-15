@@ -28,6 +28,11 @@ const Index = () => {
 
         {/* Value Proposition */}
         <div className="text-center mt-6 mb-4">
+          <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+/>
+
           <h1 className="text-xl font-semibold">
             Generate Lucky ID & Deposit Amount
           </h1>
