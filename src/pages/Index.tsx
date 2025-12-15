@@ -9,6 +9,7 @@ import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const NativeBanner = dynamic(() => import("@/components/ads/NativeBanner"), {
   ssr: false,
@@ -23,24 +24,19 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <div className="container max-w-2xl mx-auto px-4 pb-12">
-        {/* Language Toggle */}
         <div className="flex justify-end pt-4">
           <LanguageToggle />
         </div>
 
         <Header />
 
-        {/* Value Proposition */}
         <div className="text-center mt-6 mb-4">
-          <h1 className="text-xl font-semibold">
-            Generate Lucky ID & Deposit Amount
-          </h1>
+          <h1 className="text-xl font-semibold">Generate Lucky ID & Deposit Amount</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Pola angka hoki • Nomor cantik • Psikologis diterima sistem
           </p>
         </div>
 
-        {/* Tab Navigation */}
         <div className="glass-card rounded-2xl p-1.5 mb-6 flex">
           <button
             onClick={() => setActiveTab("id")}
@@ -69,20 +65,15 @@ const Index = () => {
           </button>
         </div>
 
-        {/* Generator */}
         <Suspense fallback={<div className="text-center py-8">Loading...</div>}>
           {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
         </Suspense>
 
-        {/* Native Ad - HOT AREA */}
         <div className="my-8">
-          <p className="text-xs text-muted-foreground text-center mb-2">
-            Sponsored Content
-          </p>
+          <p className="text-xs text-muted-foreground text-center mb-2">Sponsored Content</p>
           <NativeBanner />
         </div>
 
-        {/* Trust & Retention */}
         <TipsSection />
         <Disclaimer />
 
@@ -92,7 +83,6 @@ const Index = () => {
           </Link>
         </div>
 
-        {/* Footer */}
         <footer className="text-center mt-12 pt-8 border-t border-border">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} LuckyGen — Lucky Number Pattern Tool

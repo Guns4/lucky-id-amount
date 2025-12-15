@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/", // pastikan bundle selalu di-load dari root
+  base: "/", // bundle selalu dari root
   server: {
     host: "::",
     port: 8080,
@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: "dist", // pastikan Vercel serve dari folder ini
+    outDir: "dist",
     sourcemap: false,
   },
 }));
