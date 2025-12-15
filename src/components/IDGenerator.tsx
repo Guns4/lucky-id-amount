@@ -15,12 +15,12 @@ import {
 import { cn } from '@/lib/utils';
 
 const PATTERNS: { value: IDPattern; label: string; icon: string }[] = [
+  { value: 'lucky-combo', label: 'Names', icon: 'Naga88' },
   { value: 'repeating', label: 'Repeating', icon: '888' },
   { value: 'ascending', label: 'Ascending', icon: '123' },
   { value: 'descending', label: 'Descending', icon: '987' },
   { value: 'mirror', label: 'Mirror', icon: '696' },
   { value: 'double-pairs', label: 'Pairs', icon: '1122' },
-  { value: 'lucky-combo', label: 'Lucky', icon: 'WIN7' },
 ];
 
 export function IDGenerator() {
