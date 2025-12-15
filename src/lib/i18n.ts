@@ -72,7 +72,7 @@ export const translations = {
     
     // Disclaimer
     disclaimer: 'Important Notice',
-    disclaimerText: 'This website is solely a number generator tool and is not affiliated with any gambling or gaming sites. Generated numbers do not guarantee any game outcomes or results.',
+    disclaimerText: 'This website is solely a number generator tool and is not affiliated with any gambling or gaming sites.',
     
     // Tips
     tipsTitle: 'Tips & Insights',
