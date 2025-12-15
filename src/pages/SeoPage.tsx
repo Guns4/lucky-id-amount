@@ -3,63 +3,78 @@ import { Header } from "@/components/Header";
 import NativeBanner from "@/components/NativeBanner";
 import { openSmartlink } from "@/lib/smartlink";
 
-const SEO_CONTENT: Record<
-  string,
-  {
-    title: string;
-    description: string;
-    keywords: string[];
-    paragraphs: string[];
-  }
-> = {
-  "angka-keberuntungan-hari-ini": {
-    title: "Angka Keberuntungan Hari Ini Menurut Perhitungan Populer",
-    description:
-      "Cek angka keberuntungan hari ini berdasarkan pola hoki yang sering digunakan di Indonesia.",
-    keywords: [
-      "angka keberuntungan hari ini",
-      "angka hoki hari ini",
-      "angka rezeki hari ini",
-    ],
-    paragraphs: [
-      "Banyak orang di Indonesia percaya bahwa angka keberuntungan hari ini dapat mempengaruhi rezeki dan keputusan penting.",
-      "Angka hoki biasanya dihitung berdasarkan pola psikologis, tanggal, dan kebiasaan populer yang sering digunakan.",
-      "Menggunakan generator angka keberuntungan dapat membantu menemukan kombinasi angka yang terasa lebih meyakinkan.",
-    ],
-  },
+/* =========================
+   🔹 AUTO SEO GENERATOR
+========================= */
 
-  "nominal-saldo-cantik": {
-    title: "Nominal Saldo Cantik yang Dipercaya Membawa Hoki",
-    description:
-      "Temukan nominal saldo cantik yang sering digunakan karena terlihat rapi dan dipercaya membawa keberuntungan.",
-    keywords: [
-      "nominal saldo cantik",
-      "saldo hoki",
-      "angka cantik deposit",
-    ],
-    paragraphs: [
-      "Nominal saldo cantik biasanya memiliki pola angka berulang atau seimbang.",
-      "Banyak orang memilih nominal tertentu karena faktor psikologis dan kebiasaan.",
-      "Generator saldo cantik membantu menghasilkan nominal yang terlihat rapi dan profesional.",
-    ],
-  },
+// Base keyword Indonesia (high intent)
+const SEO_KEYWORDS = [
+  "angka keberuntungan",
+  "angka hoki",
+  "angka rezeki",
+  "nominal saldo cantik",
+  "angka hoki weton",
+  "angka hoki berdasarkan tanggal lahir",
+  "angka hoki populer",
+];
 
-  "angka-hoki-menurut-weton": {
-    title: "Angka Hoki Menurut Weton dan Kepercayaan Populer",
-    description:
-      "Perhitungan angka hoki menurut weton yang sering dipercaya dalam tradisi Indonesia.",
-    keywords: [
-      "angka hoki weton",
-      "angka keberuntungan weton",
-      "angka rezeki weton",
-    ],
-    paragraphs: [
-      "Weton sering digunakan untuk menentukan hari baik dan angka keberuntungan.",
-      "Meskipun bersifat kepercayaan, banyak orang merasa lebih yakin saat menggunakan angka yang sesuai.",
-      "Generator angka hoki mempermudah proses tanpa perhitungan manual.",
-    ],
-  },
-};
+// Long-tail modifier (natural)
+const SEO_MODIFIERS = [
+  "hari ini",
+  "terbaru",
+  "paling dicari",
+  "versi indonesia",
+  "menurut kepercayaan",
+  "yang sering dipakai",
+  "populer",
+];
+
+// Auto-generate SEO pages
+function generateSeoPages() {
+  const pages: Record<
+    string,
+    {
+      title: string;
+      description: string;
+      keywords: string[];
+      paragraphs: string[];
+    }
+  > = {};
+
+  SEO_KEYWORDS.forEach((keyword) => {
+    SEO_MODIFIERS.forEach((modifier) => {
+      const slug = `${keyword} ${modifier}`
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "")
+        .replace(/\s+/g, "-");
+
+      pages[slug] = {
+        title: `${keyword} ${modifier} – Generator Angka Populer Indonesia`,
+        description: `Cari ${keyword} ${modifier}? Gunakan pola angka populer yang sering dipercaya dan digunakan di Indonesia.`,
+        keywords: [
+          `${keyword} ${modifier}`,
+          keyword,
+          `${keyword} indonesia`,
+        ],
+        paragraphs: [
+          `${keyword} ${modifier} sering dipercaya memiliki pengaruh terhadap keputusan dan keberuntungan.`,
+          `Di Indonesia, banyak orang memilih angka tertentu berdasarkan kebiasaan, psikologi, dan kepercayaan populer.`,
+          `Menggunakan generator angka membantu mendapatkan kombinasi yang terlihat lebih rapi dan meyakinkan.`,
+          `Meskipun tidak bersifat pasti, pola angka sering digunakan untuk meningkatkan rasa percaya diri.`,
+        ],
+      };
+    });
+  });
+
+  return pages;
+}
+
+// 🔥 AUTO CONTENT
+const SEO_CONTENT = generateSeoPages();
+
+/* =========================
+   PAGE COMPONENT
+========================= */
 
 export default function SeoPage() {
   const { slug } = useParams();
@@ -88,7 +103,7 @@ export default function SeoPage() {
           {content.title}
         </h1>
 
-        {/* Intro */}
+        {/* Description */}
         <p className="text-muted-foreground mb-6">
           {content.description}
         </p>
@@ -100,7 +115,7 @@ export default function SeoPage() {
           ))}
         </div>
 
-        {/* 🔥 Native Ad (Hot Area – after value) */}
+        {/* 🔥 Native Ad – HOT AREA */}
         <div className="my-8">
           <p className="text-xs text-muted-foreground mb-2">
             Rekomendasi
@@ -108,13 +123,13 @@ export default function SeoPage() {
           <NativeBanner />
         </div>
 
-        {/* CTA ke Generator */}
+        {/* CTA Generator */}
         <div className="glass-card rounded-xl p-6 text-center mt-8">
           <h2 className="font-semibold mb-2">
-            Coba Generator Angka Keberuntungan
+            Gunakan Generator Angka Populer
           </h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Gunakan generator untuk mendapatkan angka yang lebih meyakinkan.
+            Dapatkan kombinasi angka yang terlihat lebih rapi dan meyakinkan.
           </p>
 
           <Link
