@@ -26,6 +26,16 @@ const Index = () => {
 
         <Header />
 
+        {/* Value Proposition */}
+        <div className="text-center mt-6 mb-4">
+          <h1 className="text-xl font-semibold">
+            Generate Lucky ID & Deposit Amount
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Pola angka hoki • Nomor cantik • Psikologis diterima sistem
+          </p>
+        </div>
+
         {/* Tab Navigation */}
         <div className="glass-card rounded-2xl p-1.5 mb-6 flex">
           <button
@@ -38,7 +48,7 @@ const Index = () => {
             )}
           >
             <Hash className="w-4 h-4" />
-            <span>{t("idGenerator")}</span>
+            <span>🎯 Lucky ID Generator</span>
           </button>
 
           <button
@@ -51,30 +61,31 @@ const Index = () => {
             )}
           >
             <Banknote className="w-4 h-4" />
-            <span>{t("amountGenerator")}</span>
+            <span>💰 Deposit Amount Generator</span>
           </button>
         </div>
 
-        {/* Tab Content */}
+        {/* Generator */}
         <div className="animate-fade-in">
           {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
         </div>
 
-        {/* Native Ad - AFTER VALUE */}
-        <div className="my-6">
+        {/* Native Ad - HOT AREA */}
+        <div className="my-8">
           <p className="text-xs text-muted-foreground text-center mb-2">
-            Sponsored
+            Sponsored Content
           </p>
           <NativeBanner />
         </div>
 
+        {/* Trust & Retention */}
         <TipsSection />
         <Disclaimer />
 
         {/* Footer */}
         <footer className="text-center mt-12 pt-8 border-t border-border">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} LuckyGen — Number Pattern Generator
+            © {new Date().getFullYear()} LuckyGen — Lucky Number Pattern Tool
           </p>
         </footer>
       </div>
