@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { GeneratedItem } from './GeneratedItem';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   generateMultipleIDs, 
   ID_PRESETS,
@@ -14,23 +15,8 @@ import {
 } from '@/lib/generators';
 import { cn } from '@/lib/utils';
 
-const PATTERNS: { value: IDPattern; label: string; icon: string }[] = [
-  { value: 'lucky-combo', label: 'Names', icon: 'Naga88' },
-  { value: 'custom-prefix', label: 'Custom', icon: 'You77' },
-  { value: 'repeating', label: 'Repeating', icon: '888' },
-  { value: 'ascending', label: 'Ascending', icon: '123' },
-  { value: 'descending', label: 'Descending', icon: '987' },
-  { value: 'mirror', label: 'Mirror', icon: '696' },
-  { value: 'double-pairs', label: 'Pairs', icon: '1122' },
-];
-
-const NUMBER_SUFFIX_OPTIONS = [
-  { value: 2, label: '2 digits' },
-  { value: 3, label: '3 digits' },
-  { value: 4, label: '4 digits' },
-];
-
 export function IDGenerator() {
+  const { t, language } = useLanguage();
   const [results, setResults] = useState<GeneratedID[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -51,6 +37,29 @@ export function IDGenerator() {
   const [includeBirthYear, setIncludeBirthYear] = useState(false);
   const [birthYear, setBirthYear] = useState('');
 
+  const PATTERNS: { value: IDPattern; label: string; icon: string }[] = [
+    { value: 'lucky-combo', label: t('names'), icon: 'Naga88' },
+    { value: 'custom-prefix', label: t('custom'), icon: 'You77' },
+    { value: 'repeating', label: t('repeating'), icon: '888' },
+    { value: 'ascending', label: t('ascending'), icon: '123' },
+    { value: 'descending', label: t('descending'), icon: '987' },
+    { value: 'mirror', label: t('mirror'), icon: '696' },
+    { value: 'double-pairs', label: t('pairs'), icon: '1122' },
+  ];
+
+  const NUMBER_SUFFIX_OPTIONS = [
+    { value: 2, label: `2 ${t('digits')}` },
+    { value: 3, label: `3 ${t('digits')}` },
+    { value: 4, label: `4 ${t('digits')}` },
+  ];
+
+  const PRESETS_LABELS: Record<string, string> = {
+    'new-account': t('newAccountId'),
+    'vip': t('vipSultanId'),
+    'safe': t('safeSubtle'),
+    'mirror': t('mirrorMagic'),
+  };
+
   const generate = useCallback(() => {
     if (!siteName.trim()) {
       return;
@@ -58,7 +67,6 @@ export function IDGenerator() {
     
     setIsGenerating(true);
     
-    // Small delay for animation effect
     setTimeout(() => {
       const favorites = favoriteNumbers
         .split(',')
@@ -110,15 +118,15 @@ export function IDGenerator() {
       <div className="glass-card rounded-xl p-4 border-primary/30">
         <div className="flex items-center gap-2 mb-3">
           <Globe className="w-5 h-5 text-primary" />
-          <Label htmlFor="siteName" className="text-sm font-semibold">Site / Platform Name</Label>
-          <span className="text-xs text-destructive">*required</span>
+          <Label htmlFor="siteName" className="text-sm font-semibold">{t('sitePlatformName')}</Label>
+          <span className="text-xs text-destructive">*{t('required')}</span>
         </div>
-        <p className="text-xs text-muted-foreground mb-3">Enter the name of the site/platform you're registering on (e.g., Pragmatic, PGSoft, Olympus)</p>
+        <p className="text-xs text-muted-foreground mb-3">{t('siteNameDescription')}</p>
         <Input
           id="siteName"
           value={siteName}
           onChange={(e) => setSiteName(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
-          placeholder="e.g. Pragmatic, Olympus, Slot88"
+          placeholder={t('siteNamePlaceholder')}
           className="font-mono text-lg"
           maxLength={20}
         />
@@ -136,7 +144,7 @@ export function IDGenerator() {
             disabled={!isSiteNameValid}
           >
             <Zap className="w-3 h-3 mr-1" />
-            {preset.label}
+            {PRESETS_LABELS[preset.id] || preset.label}
           </Button>
         ))}
       </div>
@@ -161,13 +169,13 @@ export function IDGenerator() {
       {/* Custom Name Input - shown when custom-prefix is selected */}
       {pattern === 'custom-prefix' && (
         <div className="glass-card rounded-xl p-4 animate-fade-in">
-          <Label htmlFor="customName" className="text-sm font-medium">Your Custom Name</Label>
-          <p className="text-xs text-muted-foreground mb-3">Enter your name or nickname, lucky numbers will be added automatically</p>
+          <Label htmlFor="customName" className="text-sm font-medium">{t('yourCustomName')}</Label>
+          <p className="text-xs text-muted-foreground mb-3">{t('customNameDescription')}</p>
           <Input
             id="customName"
             value={customName}
             onChange={(e) => setCustomName(e.target.value.replace(/[^a-zA-Z]/g, '').slice(0, 10))}
-            placeholder="e.g. Dewa, Raja, YourName"
+            placeholder={t('customNamePlaceholder')}
             className="font-mono text-lg"
             maxLength={10}
           />
@@ -179,7 +187,7 @@ export function IDGenerator() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             <div>
-              <Label className="text-xs text-muted-foreground">ID Length</Label>
+              <Label className="text-xs text-muted-foreground">{t('idLength')}</Label>
               <div className="font-mono text-xl font-semibold text-foreground">{length}</div>
             </div>
             <Slider
@@ -197,13 +205,13 @@ export function IDGenerator() {
             onClick={() => setShowSettings(!showSettings)}
           >
             <Settings2 className="w-4 h-4 mr-2" />
-            {showSettings ? 'Hide' : 'More'}
+            {showSettings ? t('hide') : t('more')}
           </Button>
         </div>
 
         {/* Number Suffix Length */}
         <div className="mb-4">
-          <Label className="text-xs text-muted-foreground mb-2 block">Number Suffix</Label>
+          <Label className="text-xs text-muted-foreground mb-2 block">{t('numberSuffix')}</Label>
           <div className="flex gap-2">
             {NUMBER_SUFFIX_OPTIONS.map((opt) => (
               <button
@@ -227,7 +235,7 @@ export function IDGenerator() {
           <div className="grid gap-4 pt-4 border-t border-border animate-fade-in">
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="favorites" className="text-xs">Favorite Numbers</Label>
+                <Label htmlFor="favorites" className="text-xs">{t('favoriteNumbers')}</Label>
                 <Input
                   id="favorites"
                   value={favoriteNumbers}
@@ -237,7 +245,7 @@ export function IDGenerator() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="exclude" className="text-xs">Exclude Numbers</Label>
+                <Label htmlFor="exclude" className="text-xs">{t('excludeNumbers')}</Label>
                 <Input
                   id="exclude"
                   value={excludeNumbers}
@@ -255,7 +263,7 @@ export function IDGenerator() {
                   checked={useUppercase}
                   onCheckedChange={setUseUppercase}
                 />
-                <Label htmlFor="uppercase" className="text-sm">UPPERCASE Output</Label>
+                <Label htmlFor="uppercase" className="text-sm">{t('uppercaseOutput')}</Label>
               </div>
               
               <div className="flex items-center gap-2">
@@ -264,7 +272,7 @@ export function IDGenerator() {
                   checked={includeLetters}
                   onCheckedChange={setIncludeLetters}
                 />
-                <Label htmlFor="letters" className="text-sm">Include Letters</Label>
+                <Label htmlFor="letters" className="text-sm">{t('includeLetters')}</Label>
               </div>
             </div>
 
@@ -276,7 +284,7 @@ export function IDGenerator() {
                   checked={includeBirthYear}
                   onCheckedChange={setIncludeBirthYear}
                 />
-                <Label htmlFor="birthYear" className="text-sm">Include Birth Year</Label>
+                <Label htmlFor="birthYear" className="text-sm">{t('includeBirthYear')}</Label>
               </div>
               {includeBirthYear && (
                 <Input
@@ -290,7 +298,7 @@ export function IDGenerator() {
             </div>
             
             <div className="flex items-center gap-2">
-              <Label className="text-xs text-muted-foreground">Generate Count</Label>
+              <Label className="text-xs text-muted-foreground">{t('generateCount')}</Label>
               <Input
                 type="number"
                 value={bulkCount}
@@ -318,7 +326,7 @@ export function IDGenerator() {
           <Sparkles className="w-5 h-5" />
         )}
         <span className="ml-2">
-          {!isSiteNameValid ? 'Enter Site Name First' : 'Generate IDs'}
+          {!isSiteNameValid ? t('enterSiteNameFirst') : t('generateIds')}
         </span>
       </Button>
 
@@ -327,9 +335,9 @@ export function IDGenerator() {
         <div className="space-y-3 animate-fade-in">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-muted-foreground">
-              Generated IDs for <span className="text-primary font-semibold">{siteName}</span>
+              {t('generatedIdsFor')} <span className="text-primary font-semibold">{siteName}</span>
             </h3>
-            <span className="text-xs text-muted-foreground">{results.length} results</span>
+            <span className="text-xs text-muted-foreground">{results.length} {t('results')}</span>
           </div>
           <div className="grid gap-3">
             {results.map((result, index) => (

@@ -5,16 +5,24 @@ import { IDGenerator } from '@/components/IDGenerator';
 import { AmountGenerator } from '@/components/AmountGenerator';
 import { Disclaimer } from '@/components/Disclaimer';
 import { TipsSection } from '@/components/TipsSection';
+import { LanguageToggle } from '@/components/LanguageToggle';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 
 type TabType = 'id' | 'amount';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<TabType>('id');
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen">
       <div className="container max-w-2xl mx-auto px-4 pb-12">
+        {/* Language Toggle */}
+        <div className="flex justify-end pt-4">
+          <LanguageToggle />
+        </div>
+        
         <Header />
 
         {/* Tab Navigation */}
@@ -29,7 +37,7 @@ const Index = () => {
             )}
           >
             <Hash className="w-4 h-4" />
-            <span>ID Generator</span>
+            <span>{t('idGenerator')}</span>
           </button>
           <button
             onClick={() => setActiveTab('amount')}
@@ -41,7 +49,7 @@ const Index = () => {
             )}
           >
             <Banknote className="w-4 h-4" />
-            <span>Amount Generator</span>
+            <span>{t('amountGenerator')}</span>
           </button>
         </div>
 
