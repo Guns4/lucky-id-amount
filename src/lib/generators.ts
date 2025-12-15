@@ -15,6 +15,9 @@ export interface IDGeneratorOptions {
   excludeNumbers: number[];
   includeLetters: boolean;
   prefix?: string;
+  numberSuffixLength?: number;
+  useUppercase?: boolean;
+  birthYear?: string;
 }
 
 export interface GeneratedID {
@@ -146,29 +149,38 @@ function generateDoublePairsPattern(length: number, favorites: number[], exclude
   return result.slice(0, length);
 }
 
-function generateNameBasedID(favorites: number[], exclude: number[]): string {
-  const name = getRandomFromArray(ID_NAMES);
-  const numCount = Math.random() > 0.5 ? 2 : 3; // 2 or 3 numbers
-  
+function generateLuckyNumbers(count: number, favorites: number[], exclude: number[]): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : LUCKY_NUMBERS.filter(n => !exclude.includes(n));
   
   let numbers = '';
-  for (let i = 0; i < numCount; i++) {
+  for (let i = 0; i < count; i++) {
     if (available.length > 0) {
       numbers += getRandomFromArray(available).toString();
     } else {
       numbers += getRandomFromArray(LUCKY_NUMBERS).toString();
     }
   }
+  return numbers;
+}
+
+function generateNameBasedID(options: IDGeneratorOptions): string {
+  const name = getRandomFromArray(ID_NAMES);
+  const numCount = options.numberSuffixLength || (Math.random() > 0.5 ? 2 : 3);
   
+  // If birth year is specified, use it
+  if (options.birthYear) {
+    const yearSuffix = options.birthYear.slice(-2); // Last 2 digits
+    return name + yearSuffix;
+  }
+  
+  const numbers = generateLuckyNumbers(numCount, options.favoriteNumbers, options.excludeNumbers);
   return name + numbers;
 }
 
-function generateLuckyCombo(favorites: number[], exclude: number[]): string {
-  // Now uses name-based generation
-  return generateNameBasedID(favorites, exclude);
+function generateLuckyCombo(options: IDGeneratorOptions): string {
+  return generateNameBasedID(options);
 }
 
 function calculateIDBeautyScore(id: string): number {
@@ -232,26 +244,22 @@ export function generateID(options: IDGeneratorOptions): GeneratedID {
       pattern = 'Double Pairs';
       break;
     case 'lucky-combo':
-      value = generateLuckyCombo(options.favoriteNumbers, options.excludeNumbers);
+      value = generateLuckyCombo(options);
       pattern = 'Lucky Name';
       break;
     case 'custom-prefix':
       // Use custom prefix with lucky numbers
       const customPrefix = options.prefix || 'Lucky';
-      const numCount = Math.random() > 0.5 ? 2 : 3;
-      const available = options.favoriteNumbers.length > 0 
-        ? options.favoriteNumbers.filter(n => !options.excludeNumbers.includes(n))
-        : LUCKY_NUMBERS.filter(n => !options.excludeNumbers.includes(n));
+      const numCount = options.numberSuffixLength || (Math.random() > 0.5 ? 2 : 3);
       
-      let customNumbers = '';
-      for (let i = 0; i < numCount; i++) {
-        if (available.length > 0) {
-          customNumbers += getRandomFromArray(available).toString();
-        } else {
-          customNumbers += getRandomFromArray(LUCKY_NUMBERS).toString();
-        }
+      // If birth year is specified, use it
+      if (options.birthYear) {
+        const yearSuffix = options.birthYear.slice(-2);
+        value = customPrefix + yearSuffix;
+      } else {
+        const customNumbers = generateLuckyNumbers(numCount, options.favoriteNumbers, options.excludeNumbers);
+        value = customPrefix + customNumbers;
       }
-      value = customPrefix + customNumbers;
       pattern = 'Custom Name';
       break;
     default:
@@ -259,8 +267,11 @@ export function generateID(options: IDGeneratorOptions): GeneratedID {
       pattern = 'Random';
   }
   
+  // Apply uppercase option
+  const finalValue = options.useUppercase !== false ? value.toUpperCase() : value;
+  
   return {
-    value: value.toUpperCase(),
+    value: finalValue,
     beautyScore: calculateIDBeautyScore(value),
     pattern,
   };
