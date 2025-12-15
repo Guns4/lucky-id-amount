@@ -1,25 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+
+  <!-- ========================= -->
+  <!-- 🔥 CORE PAGES (PRIORITY) -->
+  <!-- ========================= -->
 
   <url>
-    <loc>https://domainkamu.com/</loc>
-    <priority>1.0</priority>
+    <loc>https://lucky-id-amount.vercel.app/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
   </url>
 
   <url>
-    <loc>https://domainkamu.com/seo</loc>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- AUTO SEO SLUGS -->
-  <url>
-    <loc>https://domainkamu.com/seo/angka-keberuntungan-hari-ini</loc>
-    <priority>0.8</priority>
+    <loc>https://lucky-id-amount.vercel.app/id-generator</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://domainkamu.com/seo/nominal-saldo-cantik-populer</loc>
-    <priority>0.8</priority>
+    <loc>https://lucky-id-amount.vercel.app/lucky-amount-generator</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- ========================= -->
+  <!-- 📚 SEO INDEX PAGE -->
+  <!-- ========================= -->
+
+  <url>
+    <loc>https://lucky-id-amount.vercel.app/seo</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- ========================= -->
+  <!-- 🚀 AUTO-GENERATED SEO PAGES -->
+  <!-- ========================= -->
+
+  <url>
+    <loc>https://lucky-id-amount.vercel.app/seo/id-gacor-hari-ini</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://lucky-id-amount.vercel.app/seo/id-hoki-777</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://lucky-id-amount.vercel.app/seo/id-kembar-888</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://lucky-id-amount.vercel.app/seo/angka-keberuntungan-indonesia</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://lucky-id-amount.vercel.app/seo/pola-angka-hoki</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
   </url>
 
 </urlset>
