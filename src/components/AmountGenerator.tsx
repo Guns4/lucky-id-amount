@@ -1,10 +1,11 @@
 import { useState, useCallback } from 'react';
-import { Sparkles, Shuffle, Settings2, Zap, Banknote } from 'lucide-react';
+import { Shuffle, Settings2, Zap, Banknote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { GeneratedItem } from './GeneratedItem';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   generateMultipleAmounts, 
   AMOUNT_PRESETS,
@@ -13,15 +14,8 @@ import {
 } from '@/lib/generators';
 import { cn } from '@/lib/utils';
 
-const CATEGORIES: { value: AmountCategory['type']; label: string; icon: React.ReactNode }[] = [
-  { value: 'lucky', label: 'Lucky', icon: '🍀' },
-  { value: 'unique-odd', label: 'Unique', icon: '✨' },
-  { value: 'psychological', label: 'Psych', icon: '🧠' },
-  { value: 'round-beautiful', label: 'Round', icon: '💎' },
-  { value: 'balanced', label: 'Balanced', icon: '⚖️' },
-];
-
 export function AmountGenerator() {
+  const { t } = useLanguage();
   const [results, setResults] = useState<GeneratedAmount[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -32,6 +26,21 @@ export function AmountGenerator() {
   const [maxAmount, setMaxAmount] = useState('1000000');
   const [includeDecimals, setIncludeDecimals] = useState(false);
   const [bulkCount, setBulkCount] = useState(5);
+
+  const CATEGORIES: { value: AmountCategory['type']; label: string; icon: React.ReactNode }[] = [
+    { value: 'lucky', label: t('lucky'), icon: '🍀' },
+    { value: 'unique-odd', label: t('uniqueOdd'), icon: '✨' },
+    { value: 'psychological', label: t('psychological'), icon: '🧠' },
+    { value: 'round-beautiful', label: t('roundBeautiful'), icon: '💎' },
+    { value: 'balanced', label: t('balanced'), icon: '⚖️' },
+  ];
+
+  const PRESETS_LABELS: Record<string, string> = {
+    'lucky': t('luckyDeposit'),
+    'psychological': t('psychological'),
+    'subtle': t('subtleSafe'),
+    'premium': t('premiumRound'),
+  };
 
   const generate = useCallback(() => {
     setIsGenerating(true);
@@ -85,7 +94,7 @@ export function AmountGenerator() {
             className="text-xs"
           >
             <Zap className="w-3 h-3 mr-1" />
-            {preset.label}
+            {PRESETS_LABELS[preset.id] || preset.label}
           </Button>
         ))}
       </div>
@@ -111,7 +120,7 @@ export function AmountGenerator() {
       <div className="glass-card rounded-xl p-4">
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="minAmount" className="text-xs text-muted-foreground">Minimum Amount</Label>
+            <Label htmlFor="minAmount" className="text-xs text-muted-foreground">{t('minimum')}</Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">Rp</span>
               <Input
@@ -124,7 +133,7 @@ export function AmountGenerator() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="maxAmount" className="text-xs text-muted-foreground">Maximum Amount</Label>
+            <Label htmlFor="maxAmount" className="text-xs text-muted-foreground">{t('maximum')}</Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">Rp</span>
               <Input
@@ -145,11 +154,11 @@ export function AmountGenerator() {
             onClick={() => setShowSettings(!showSettings)}
           >
             <Settings2 className="w-4 h-4 mr-2" />
-            {showSettings ? 'Hide' : 'More Options'}
+            {showSettings ? t('hide') : t('more')}
           </Button>
           
           <div className="flex items-center gap-2">
-            <Label className="text-xs text-muted-foreground">Generate</Label>
+            <Label className="text-xs text-muted-foreground">{t('generateCount')}</Label>
             <Input
               type="number"
               value={bulkCount}
@@ -170,7 +179,7 @@ export function AmountGenerator() {
                 checked={includeDecimals}
                 onCheckedChange={setIncludeDecimals}
               />
-              <Label htmlFor="decimals" className="text-sm">Include Decimals</Label>
+              <Label htmlFor="decimals" className="text-sm">{t('includeDecimals')}</Label>
             </div>
           </div>
         )}
@@ -189,15 +198,15 @@ export function AmountGenerator() {
         ) : (
           <Banknote className="w-5 h-5" />
         )}
-        <span className="ml-2">Generate Amounts</span>
+        <span className="ml-2">{t('generateAmounts')}</span>
       </Button>
 
       {/* Results */}
       {results.length > 0 && (
         <div className="space-y-3 animate-fade-in">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-muted-foreground">Generated Amounts</h3>
-            <span className="text-xs text-muted-foreground">{results.length} results</span>
+            <h3 className="text-sm font-medium text-muted-foreground">{t('generatedAmounts')}</h3>
+            <span className="text-xs text-muted-foreground">{results.length} {t('results')}</span>
           </div>
           <div className="grid gap-3">
             {results.map((result, index) => (

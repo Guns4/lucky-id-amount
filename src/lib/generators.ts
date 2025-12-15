@@ -50,8 +50,16 @@ const LUCKY_NUMBERS = [7, 8, 9];
 
 // Name bases for ID generation - variety of cool names
 const ID_NAMES = [
+  // Indonesian Mythical & Cultural
+  'Dewa', 'Raja', 'Satria', 'Garuda', 'Ksatria', 'Pangeran', 'Ratu', 'Prabu',
+  'Arjuna', 'Bima', 'Gatotkaca', 'Kresna', 'Semar', 'Petruk', 'Bagong',
+  // Indonesian Nature & Power
+  'Elang', 'Harimau', 'Singa', 'Rajawali', 'Banteng', 'Badak', 'Komodo',
+  // Indonesian Cool Words
+  'Sakti', 'Jaya', 'Wijaya', 'Kusuma', 'Putra', 'Surya', 'Bayu', 'Agung',
+  'Mega', 'Berlian', 'Emas', 'Mutiara', 'Permata', 'Intan',
   // Dragons & Mythical
-  'Naga', 'Dragon', 'Phoenix', 'Titan', 'Zeus', 'Thor', 'Odin', 'Hades',
+  'Naga', 'Dragon', 'Phoenix', 'Titan', 'Zeus', 'Thor', 'Odin',
   // Winners & Champions
   'King', 'Queen', 'Sultan', 'Boss', 'Chief', 'Master', 'Legend', 'Hero',
   // Luck & Fortune

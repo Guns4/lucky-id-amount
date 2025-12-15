@@ -1,6 +1,9 @@
 import { Sparkles } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function Header() {
+  const { t } = useLanguage();
+  
   return (
     <header className="text-center py-8 sm:py-12">
       <div className="inline-flex items-center justify-center gap-2 mb-4">
@@ -10,10 +13,10 @@ export function Header() {
         </div>
       </div>
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display tracking-tight mb-3">
-        <span className="gradient-text">LuckyGen</span>
+        <span className="gradient-text">{t('siteName')}</span>
       </h1>
       <p className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto">
-        Generate beautiful IDs & psychological deposit amounts with lucky number patterns
+        {t('siteTagline')}
       </p>
     </header>
   );

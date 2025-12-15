@@ -1,34 +1,32 @@
 import { Lightbulb, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 
-const tips = [
-  {
-    title: 'Why is 8 considered lucky?',
-    content: 'In many Asian cultures, 8 (八, bā) sounds similar to "prosperity" or "wealth" (發, fā). This phonetic similarity has made 8 one of the most sought-after lucky numbers.'
-  },
-  {
-    title: 'Natural-looking deposits',
-    content: 'Amounts like 97,500 or 103,000 appear more natural than round numbers. They suggest calculated top-ups rather than preset amounts.'
-  },
-  {
-    title: 'Mirror IDs are memorable',
-    content: 'Palindrome patterns like 1221 or 6996 are easier to remember because your brain only needs to memorize half the sequence.'
-  },
-  {
-    title: 'Avoid common patterns',
-    content: 'While 123456 looks attractive, it\'s one of the most commonly used sequences. Consider less obvious patterns that still look premium.'
-  },
-];
-
 export function TipsSection() {
+  const { t } = useLanguage();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const tips = [
+    {
+      title: t('tip1Title'),
+      content: t('tip1Content'),
+    },
+    {
+      title: t('tip2Title'),
+      content: t('tip2Content'),
+    },
+    {
+      title: t('tip3Title'),
+      content: t('tip3Content'),
+    },
+  ];
 
   return (
     <div className="mt-12 space-y-4">
       <div className="flex items-center gap-2 mb-4">
         <Lightbulb className="w-5 h-5 text-primary" />
-        <h2 className="font-semibold text-foreground">Tips & Insights</h2>
+        <h2 className="font-semibold text-foreground">{t('tipsTitle')}</h2>
       </div>
       
       <div className="grid gap-2">
