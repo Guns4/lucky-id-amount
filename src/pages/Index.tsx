@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { Hash, Banknote } from 'lucide-react';
-import { Header } from '@/components/Header';
-import { IDGenerator } from '@/components/IDGenerator';
-import { AmountGenerator } from '@/components/AmountGenerator';
-import { Disclaimer } from '@/components/Disclaimer';
-import { TipsSection } from '@/components/TipsSection';
-import { LanguageToggle } from '@/components/LanguageToggle';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import { Hash, Banknote } from "lucide-react";
+import { Header } from "@/components/Header";
+import { IDGenerator } from "@/components/IDGenerator";
+import { AmountGenerator } from "@/components/AmountGenerator";
+import { Disclaimer } from "@/components/Disclaimer";
+import { TipsSection } from "@/components/TipsSection";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
+import NativeBanner from "@/components/NativeBanner";
 
-type TabType = 'id' | 'amount';
+type TabType = "id" | "amount";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('id');
+  const [activeTab, setActiveTab] = useState<TabType>("id");
   const { t } = useLanguage();
 
   return (
@@ -22,40 +23,49 @@ const Index = () => {
         <div className="flex justify-end pt-4">
           <LanguageToggle />
         </div>
-        
+
         <Header />
 
         {/* Tab Navigation */}
         <div className="glass-card rounded-2xl p-1.5 mb-6 flex">
           <button
-            onClick={() => setActiveTab('id')}
+            onClick={() => setActiveTab("id")}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium transition-all duration-200',
-              activeTab === 'id'
-                ? 'bg-primary text-primary-foreground shadow-gold'
-                : 'text-muted-foreground hover:text-foreground'
+              "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium transition-all duration-200",
+              activeTab === "id"
+                ? "bg-primary text-primary-foreground shadow-gold"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <Hash className="w-4 h-4" />
-            <span>{t('idGenerator')}</span>
+            <span>{t("idGenerator")}</span>
           </button>
+
           <button
-            onClick={() => setActiveTab('amount')}
+            onClick={() => setActiveTab("amount")}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium transition-all duration-200',
-              activeTab === 'amount'
-                ? 'bg-primary text-primary-foreground shadow-gold'
-                : 'text-muted-foreground hover:text-foreground'
+              "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium transition-all duration-200",
+              activeTab === "amount"
+                ? "bg-primary text-primary-foreground shadow-gold"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <Banknote className="w-4 h-4" />
-            <span>{t('amountGenerator')}</span>
+            <span>{t("amountGenerator")}</span>
           </button>
         </div>
 
         {/* Tab Content */}
         <div className="animate-fade-in">
-          {activeTab === 'id' ? <IDGenerator /> : <AmountGenerator />}
+          {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
+        </div>
+
+        {/* Native Ad - AFTER VALUE */}
+        <div className="my-6">
+          <p className="text-xs text-muted-foreground text-center mb-2">
+            Sponsored
+          </p>
+          <NativeBanner />
         </div>
 
         <TipsSection />
