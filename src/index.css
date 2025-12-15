@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 6%;
+    --foreground: 45 20% 95%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 220 18% 12%;
+    --popover-foreground: 45 20% 95%;
+
+    --primary: 43 96% 56%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 15% 16%;
+    --secondary-foreground: 45 20% 90%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 43 80% 45%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 45 20% 95%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 45 20% 95%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 43 96% 56%;
+
+    --radius: 0.75rem;
+
+    /* Glow */
+    --gold-glow: 0 0 20px hsl(43 96% 56% / 0.3);
+    --gold-glow-strong: 0 0 30px hsl(43 96% 56% / 0.5);
+    --card-glow: 0 4px 24px hsl(0 0% 0% / 0.4);
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 96% 56%), hsl(35 95% 45%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 18% 12%), hsl(220 20% 6%));
+    --gradient-card: linear-gradient(145deg, hsl(220 18% 13%), hsl(220 18% 9%));
+
+    /* Fonts (loaded from index.html) */
+    --font-display: 'Outfit', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: var(--font-display);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image: 
+      radial-gradient(ellipse at 50% 0%, hsl(43 96% 56% / 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, hsl(220 50% 20% / 0.1) 0%, transparent 40%);
+    background-attachment: fixed;
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+    box-shadow: var(--card-glow);
+  }
+
+  .gold-glow {
+    box-shadow: var(--gold-glow);
+  }
+
+  .gold-glow-strong {
+    box-shadow: var(--gold-glow-strong);
+  }
+
+  .number-display {
+    @apply font-mono text-2xl sm:text-3xl font-semibold tracking-wider;
+    text-shadow: 0 0 20px hsl(43 96% 56% / 0.3);
+  }
+
+  .beautiful-number {
+    @apply text-primary;
+    text-shadow: 0 0 25px hsl(43 96% 56% / 0.5);
+  }
+
+  .gradient-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .animate-pulse-gold {
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 20px hsl(43 96% 56% / 0.2); }
+    50% { box-shadow: 0 0 30px hsl(43 96% 56% / 0.4); }
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
