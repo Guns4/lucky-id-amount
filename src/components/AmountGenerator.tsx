@@ -230,6 +230,14 @@ export function AmountGenerator() {
         disabled={isGenerating}
         className="w-full text-lg"
       >
+        {/* 🔥 Native Ad - Hot Click Zone */}
+<div className="mt-4 mb-2">
+  <p className="text-[10px] text-muted-foreground text-center mb-1">
+    Sponsored
+  </p>
+  <NativeBanner />
+</div>
+
         {isGenerating ? (
           <Shuffle className="w-5 h-5 animate-spin" />
         ) : (
