@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   :root {
     --background: 220 20% 6%;
@@ -39,36 +37,21 @@
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
+    /* Glow */
     --gold-glow: 0 0 20px hsl(43 96% 56% / 0.3);
     --gold-glow-strong: 0 0 30px hsl(43 96% 56% / 0.5);
     --card-glow: 0 4px 24px hsl(0 0% 0% / 0.4);
-    
+
     /* Gradients */
     --gradient-gold: linear-gradient(135deg, hsl(43 96% 56%), hsl(35 95% 45%));
     --gradient-dark: linear-gradient(180deg, hsl(220 18% 12%), hsl(220 20% 6%));
     --gradient-card: linear-gradient(145deg, hsl(220 18% 13%), hsl(220 18% 9%));
 
+    /* Fonts (loaded from index.html) */
     --font-display: 'Outfit', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-
-    --sidebar-background: 220 18% 8%;
-    --sidebar-foreground: 45 20% 95%;
-    --sidebar-primary: 43 96% 56%;
-    --sidebar-primary-foreground: 220 20% 6%;
-    --sidebar-accent: 220 15% 16%;
-    --sidebar-accent-foreground: 45 20% 90%;
-    --sidebar-border: 220 15% 20%;
-    --sidebar-ring: 43 96% 56%;
   }
 
-  .dark {
-    --background: 220 20% 6%;
-    --foreground: 45 20% 95%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
@@ -122,23 +105,6 @@
     background: var(--gradient-gold);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .animate-shimmer {
-    background: linear-gradient(
-      90deg,
-      hsl(220 15% 18%) 0%,
-      hsl(220 15% 25%) 50%,
-      hsl(220 15% 18%) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s ease-in-out infinite;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
   }
 
   .animate-pulse-gold {
@@ -148,25 +114,6 @@
   @keyframes pulse-gold {
     0%, 100% { box-shadow: 0 0 20px hsl(43 96% 56% / 0.2); }
     50% { box-shadow: 0 0 30px hsl(43 96% 56% / 0.4); }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-
-  .copy-success {
-    animation: copy-pop 0.3s ease-out;
-  }
-
-  @keyframes copy-pop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
   }
 }
 
