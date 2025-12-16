@@ -6,6 +6,7 @@ import { AmountGenerator } from "@/components/AmountGenerator";
 import { Disclaimer } from "@/components/Disclaimer";
 import { TipsSection } from "@/components/TipsSection";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import { lazy } from "react";
@@ -22,7 +23,8 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <div className="container max-w-2xl mx-auto px-4 pb-12">
-        <div className="flex justify-end pt-4">
+        <div className="flex justify-end gap-2 pt-4">
+          <ThemeToggle />
           <LanguageToggle />
         </div>
 

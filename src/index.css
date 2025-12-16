@@ -10,6 +10,55 @@
 ========================================= */
 @layer base {
   :root {
+    --background: 45 30% 96%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 43 96% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 45 20% 90%;
+    --secondary-foreground: 220 15% 20%;
+
+    --muted: 45 15% 88%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 43 80% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 45 15% 85%;
+    --input: 45 15% 90%;
+    --ring: 43 96% 45%;
+
+    --radius: 0.75rem;
+
+    /* Glow */
+    --gold-glow: 0 0 20px hsl(43 96% 45% / 0.2);
+    --gold-glow-strong: 0 0 30px hsl(43 96% 45% / 0.35);
+    --card-glow: 0 4px 24px hsl(0 0% 0% / 0.08);
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 96% 50%), hsl(35 95% 40%));
+    --gradient-dark: linear-gradient(180deg, hsl(45 30% 98%), hsl(45 30% 94%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(45 20% 97%));
+
+    /* Fonts */
+    --font-display: 'Outfit', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .dark {
     --background: 220 20% 6%;
     --foreground: 45 20% 95%;
 
@@ -41,8 +90,6 @@
     --input: 220 15% 18%;
     --ring: 43 96% 56%;
 
-    --radius: 0.75rem;
-
     /* Glow */
     --gold-glow: 0 0 20px hsl(43 96% 56% / 0.3);
     --gold-glow-strong: 0 0 30px hsl(43 96% 56% / 0.5);
@@ -52,10 +99,6 @@
     --gradient-gold: linear-gradient(135deg, hsl(43 96% 56%), hsl(35 95% 45%));
     --gradient-dark: linear-gradient(180deg, hsl(220 18% 12%), hsl(220 20% 6%));
     --gradient-card: linear-gradient(145deg, hsl(220 18% 13%), hsl(220 18% 9%));
-
-    /* Fonts (loaded from index.html) */
-    --font-display: 'Outfit', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
   }
 
   * {
@@ -68,10 +111,20 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    background-attachment: fixed;
+  }
+
+  .dark body,
+  body:has(.dark) {
     background-image:
       radial-gradient(ellipse at 50% 0%, hsl(43 96% 56% / 0.03) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 80%, hsl(220 50% 20% / 0.1) 0%, transparent 40%);
-    background-attachment: fixed;
+  }
+
+  :root body {
+    background-image:
+      radial-gradient(ellipse at 50% 0%, hsl(43 96% 45% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, hsl(45 30% 80% / 0.15) 0%, transparent 40%);
   }
 
   .font-mono {
