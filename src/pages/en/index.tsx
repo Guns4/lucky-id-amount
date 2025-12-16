@@ -11,6 +11,8 @@ import { Disclaimer } from "@/components/Disclaimer";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import Footer from "@/components/footer/Footer";
 import { cn } from "@/lib/utils";
+import AutoHreflang from "@/components/seo/AutoHreflang";
+import PageSchema from "@/components/seo/PageSchema";
 
 const IDGenerator = lazy(() => import("@/components/IDGenerator"));
 const AmountGenerator = lazy(() => import("@/components/AmountGenerator"));
