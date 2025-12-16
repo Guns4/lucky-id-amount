@@ -1,7 +1,3 @@
-// =============================
-// FILE: src/pages/en/index.tsx
-// =============================
-
 import { useState, lazy, Suspense } from "react";
 import { Hash, Banknote } from "lucide-react";
 import { Helmet } from "react-helmet-async";
@@ -26,13 +22,20 @@ export default function EnglishHome() {
   return (
     <div className="min-h-screen">
       <Helmet>
+        <html lang="en" />
         <title>Lucky ID & Beautiful Number Generator | LuckyGen</title>
         <meta
           name="description"
           content="Generate lucky IDs and beautiful deposit number patterns instantly. Free online lucky number generator for global users." />
-        <link rel="canonical" href="https://www.luckygen.click/en/" />
-        <html lang="en" />
+        <link rel="canonical" href="https://www.luckygen.click/en" />
       </Helmet>
+
+      <AutoHreflang />
+      <PageSchema
+        name="LuckyGen – Lucky ID & Amount Generator"
+        description="Generate lucky IDs and beautiful number patterns globally."
+        url="https://www.luckygen.click/en"
+      />
 
       <div className="container max-w-2xl mx-auto px-4 pb-12">
         <div className="flex justify-end pt-4">

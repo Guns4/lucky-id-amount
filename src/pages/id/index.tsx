@@ -1,7 +1,3 @@
-// =============================
-// FILE: src/pages/id/index.tsx
-// =============================
-
 import { useState, lazy, Suspense } from "react";
 import { Hash, Banknote } from "lucide-react";
 import { Helmet } from "react-helmet-async";
@@ -11,6 +7,8 @@ import { Disclaimer } from "@/components/Disclaimer";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import Footer from "@/components/footer/Footer";
 import { cn } from "@/lib/utils";
+import AutoHreflang from "@/components/seo/AutoHreflang";
+import PageSchema from "@/components/seo/PageSchema";
 
 const IDGenerator = lazy(() => import("@/components/IDGenerator"));
 const AmountGenerator = lazy(() => import("@/components/AmountGenerator"));
@@ -24,13 +22,20 @@ export default function IndonesianHome() {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>Generator Lucky ID & Nominal Cantik | LuckyGen</title>
+        <html lang="id" />
+        <title>Generator ID Hoki & Nominal Cantik | LuckyGen</title>
         <meta
           name="description"
-          content="Generator angka hoki dan nominal cantik online. Gratis, cepat, dan mudah digunakan." />
-        <link rel="canonical" href="https://www.luckygen.click/id/" />
-        <html lang="id" />
+          content="Generator angka keberuntungan, ID hoki, dan nominal cantik populer di Indonesia. Gratis dan mudah digunakan." />
+        <link rel="canonical" href="https://www.luckygen.click/id" />
       </Helmet>
+
+      <AutoHreflang />
+      <PageSchema
+        name="LuckyGen – Generator ID & Nominal Hoki"
+        description="Generator angka hoki dan nominal cantik populer di Indonesia."
+        url="https://www.luckygen.click/id"
+      />
 
       <div className="container max-w-2xl mx-auto px-4 pb-12">
         <div className="flex justify-end pt-4">
@@ -41,10 +46,10 @@ export default function IndonesianHome() {
 
         <div className="text-center mt-6 mb-4">
           <h1 className="text-xl font-semibold">
-            Generator Lucky ID & Nominal Deposit
+            Generator ID Hoki & Nominal Deposit
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Pola angka hoki • Nomor cantik
+            Pola angka hoki • Nominal cantik
           </p>
         </div>
 
@@ -58,7 +63,7 @@ export default function IndonesianHome() {
                 : "text-muted-foreground"
             )}
           >
-            <Hash className="w-4 h-4" /> Lucky ID
+            <Hash className="w-4 h-4" /> ID Hoki
           </button>
 
           <button
