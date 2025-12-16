@@ -20,17 +20,17 @@ export default function NativeBanner() {
   }, []);
 
   return (
-    <div
-      style={{
-        margin: "24px auto",
-        textAlign: "center",
-        maxWidth: "100%",
-      }}
-    >
-      <div
-        id="container-cbd23b4bd83d763695438a74499ae29d"
-        ref={containerRef}
-      />
+    <div className="w-full max-w-md mx-auto my-4 px-2">
+      <div className="glass-card rounded-xl p-3 border border-border/30">
+        <p className="text-[10px] text-muted-foreground/60 text-center mb-2 uppercase tracking-wider">
+          Sponsored
+        </p>
+        <div
+          id="container-cbd23b4bd83d763695438a74499ae29d"
+          ref={containerRef}
+          className="min-h-[50px] flex items-center justify-center overflow-hidden"
+        />
+      </div>
     </div>
   );
 }
