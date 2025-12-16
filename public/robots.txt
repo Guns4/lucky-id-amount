@@ -1,16 +1,11 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
 
+# Block internal / build / irrelevant paths
+Disallow: /api/
+Disallow: /_vercel/
+Disallow: /assets/
+Disallow: /*?*
+
+# Sitemap
 Sitemap: https://www.luckygen.click/sitemap.xml
