@@ -13,6 +13,7 @@ import PrivacyPolicy from "@/pages/legal/PrivacyPolicy";
 import TermsOfService from "@/pages/legal/TermsOfService";
 import AboutUs from "@/pages/legal/AboutUs";
 import Contact from "@/pages/legal/Contact";
+import GlobalSchema from "@/components/seo/GlobalSchema";
 
 // ===== Lazy-loaded SEO / Utility Pages =====
 const SeoIndex = lazy(() => import("@/pages/SeoIndex"));
@@ -30,7 +31,8 @@ const PageLoader = () => (
 export default function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <GlobalSchema />
         <LanguageProvider>
           <Suspense fallback={<PageLoader />}>
             <Routes>
