@@ -16,6 +16,9 @@ const SEO_KEYWORDS = [
   "angka hoki weton",
   "angka hoki berdasarkan tanggal lahir",
   "angka hoki populer",
+  "id generator",
+  "pola gacor",
+  "Situs gacor",
 ];
 
 // Long-tail modifier (natural)
@@ -217,3 +220,4 @@ export default function SeoPage() {
     </div>
   );
 }
+
