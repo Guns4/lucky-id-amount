@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
-import NativeBanner from "@/components/NativeBanner";
+import NativeBanner from "@/components/ads/NativeBanner";
 
 const SEO_KEYWORDS = [
   "angka keberuntungan",
