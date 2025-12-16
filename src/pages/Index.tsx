@@ -8,12 +8,10 @@ import { TipsSection } from "@/components/TipsSection";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-import Link from "next/link";
+import { lazy } from "react";
+import { Link } from "react-router-dom";
 
-const NativeBanner = dynamic(() => import("@/components/ads/NativeBanner"), {
-  ssr: false,
-});
+const NativeBanner = lazy(() => import("@/components/ads/NativeBanner"));
 
 type TabType = "id" | "amount";
 
@@ -78,7 +76,7 @@ const Index = () => {
         <Disclaimer />
 
         <div className="mt-10 text-center">
-          <Link href="/lucky-amount-generator" className="text-sm text-primary hover:underline">
+          <Link to="/lucky-amount-generator" className="text-sm text-primary hover:underline">
             Lucky Amount Generator Indonesia →
           </Link>
         </div>

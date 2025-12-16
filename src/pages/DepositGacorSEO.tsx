@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import NativeBanner from "@/components/NativeBanner";
+import NativeBanner from "@/components/ads/NativeBanner";
 
 export default function DepositGacorSEO() {
   return (
