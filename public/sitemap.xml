@@ -3,6 +3,7 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
+
   <!-- Homepage -->
   <url>
     <loc>https:https://auto-id-gacor.vercel.app/</loc>
@@ -30,6 +31,18 @@
   </url>
   <url>
     <loc>https://www.luckygen.click/disclaimer</loc>
+    <priority>0.7</priority>
+  </url>
+      <loc>https://www.luckygen.click/privacy-policy</loc>
+    <priority>0.7</priority>
+  </url>
+      <loc>https://www.luckygen.click/terms-of-service</loc>
+    <priority>0.7</priority>
+  </url>
+      <loc>https://www.luckygen.click/about-us</loc>
+    <priority>0.7</priority>
+  </url>
+      <loc>https://www.luckygen.click/contact</loc>
     <priority>0.7</priority>
   </url>
 </urlset>
