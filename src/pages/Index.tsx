@@ -33,7 +33,7 @@ const Index = () => {
         <div className="text-center mt-6 mb-4">
           <h1 className="text-xl font-semibold">Generate Lucky ID & Deposit Amount</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Pola angka hoki • Nomor cantik • Psikologis diterima sistem
+            Pola angka hoki • Nomor cantik
           </p>
         </div>
 
