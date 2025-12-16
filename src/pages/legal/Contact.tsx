@@ -1,27 +1,41 @@
 import { Helmet } from "react-helmet-async";
 
 
-export default function PrivacyPolicy() {
+export default function Contact() {
 return (
 <div className="container max-w-3xl mx-auto px-4 py-10">
 <Helmet>
-<title>Privacy Policy | LuckyGen</title>
-<meta name="description" content="Privacy Policy for LuckyGen website." />
-<link rel="canonical" href="https://www.luckygen.click/privacy-policy" />
+<title>Contact Us | LuckyGen</title>
+<meta
+name="description"
+content="Contact LuckyGen for questions, feedback, or business inquiries."
+/>
+<link rel="canonical" href="https://www.luckygen.click/contact" />
 </Helmet>
 
 
-<h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
-<p className="text-sm text-muted-foreground">Last updated: {new Date().toDateString()}</p>
+<h1 className="text-2xl font-bold mb-4">Contact Us</h1>
 
 
-{/* Contact Us – LuckyGen
+<section className="space-y-4 text-sm leading-relaxed">
+<p>
+We welcome feedback, suggestions, and general inquiries regarding
+LuckyGen.
+</p>
 
-If you have any questions, feedback, or partnership inquiries, feel free to reach out to us.
 
-📧 Email: support@LuckyGen.com
+<p>
+Please reach us via email:
+<br />
+<strong>support@luckygen.click</strong>
+</p>
 
-We aim to respond to all inquiries within 48 hours. */}
+
+<p>
+We aim to respond to all legitimate inquiries within a reasonable time
+frame.
+</p>
+</section>
 </div>
 );
 }

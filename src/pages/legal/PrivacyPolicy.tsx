@@ -1,43 +1,72 @@
 import { Helmet } from "react-helmet-async";
 
-
 export default function PrivacyPolicy() {
-return (
-<div className="container max-w-3xl mx-auto px-4 py-10">
-<Helmet>
-<title>Privacy Policy | LuckyGen</title>
-<meta name="description" content="Privacy Policy for LuckyGen website." />
-<link rel="canonical" href="https://yourdomain.com/privacy-policy" />
-</Helmet>
+  return (
+    <div className="container max-w-3xl mx-auto px-4 py-10">
+      <Helmet>
+        <title>Privacy Policy | LuckyGen</title>
+        <meta
+          name="description"
+          content="Privacy Policy of LuckyGen explaining how we collect, use, and protect user information on our website."
+        />
+        <link
+          rel="canonical"
+          href="https://www.luckygen.click/privacy-policy"
+        />
+      </Helmet>
 
+      <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
+      <p className="text-sm text-muted-foreground mb-6">
+        Last updated: {new Date().toDateString()}
+      </p>
 
-<h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
-<p className="text-sm text-muted-foreground">Last updated: {new Date().toDateString()}</p>
+      <section className="space-y-4 text-sm leading-relaxed">
+        <p>
+          LuckyGen respects your privacy and is committed to protecting any
+          information you may provide while using our website.
+        </p>
 
+        <h2 className="font-semibold text-base">Information We Collect</h2>
+        <p>
+          We do not require users to create accounts or submit personal
+          information. However, we may collect non-personal data such as browser
+          type, device information, and usage statistics for analytics and
+          website improvement purposes.
+        </p>
 
-{/* Privacy Policy – LuckyGen
+        <h2 className="font-semibold text-base">Cookies</h2>
+        <p>
+          LuckyGen may use cookies and similar technologies to enhance user
+          experience, analyze traffic, and serve relevant advertisements.
+          Users can disable cookies through their browser settings.
+        </p>
 
-At LuckyGen, accessible from our website, protecting your privacy is one of our main priorities. This Privacy Policy document outlines the types of information that are collected and recorded by LuckyGen and how we use it.
+        <h2 className="font-semibold text-base">Third-Party Services</h2>
+        <p>
+          We may use third-party services such as analytics providers or
+          advertising networks. These services may collect information in
+          accordance with their own privacy policies.
+        </p>
 
-Information We Collect
+        <h2 className="font-semibold text-base">Advertising</h2>
+        <p>
+          Advertisements displayed on LuckyGen may be delivered by advertising
+          partners who may use cookies or web beacons to collect non-personal
+          information.
+        </p>
 
-We may collect non-personal information such as browser type, device information, IP address, and usage behavior for analytics and website optimization purposes.
+        <h2 className="font-semibold text-base">Changes to This Policy</h2>
+        <p>
+          LuckyGen reserves the right to update this Privacy Policy at any time.
+          Any changes will be posted on this page.
+        </p>
 
-Cookies and Web Beacons
-
-LuckyGen uses cookies to store information about visitors’ preferences and optimize user experience by customizing our web page content based on visitors’ browser type or other information.
-
-Advertising Partners
-
-Some of our advertising partners may use cookies and web beacons. These technologies are used to measure the effectiveness of advertising campaigns and/or to personalize the advertising content that you see.
-
-Third Party Privacy Policies
-
-LuckyGen’s Privacy Policy does not apply to other advertisers or websites. We advise you to consult the respective Privacy Policies of third-party ad servers for more detailed information.
-
-Consent
-
-By using our website, you hereby consent to our Privacy Policy and agree to its terms. */}
-</div>
-);
+        <h2 className="font-semibold text-base">Contact Us</h2>
+        <p>
+          If you have any questions regarding this Privacy Policy, please
+          contact us through the contact page on our website.
+        </p>
+      </section>
+    </div>
+  );
 }
