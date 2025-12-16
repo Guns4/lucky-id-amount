@@ -69,12 +69,12 @@ const Index = () => {
           {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
         </Suspense>
 
-        <div className="my-8">
-          <p className="text-xs text-muted-foreground text-center mb-2">Sponsored Content</p>
-          <NativeBanner />
-        </div>
-
         <TipsSection />
+
+        <Suspense fallback={null}>
+          <NativeBanner />
+        </Suspense>
+
         <Disclaimer />
 
         <div className="mt-10 text-center">
