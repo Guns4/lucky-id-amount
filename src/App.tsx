@@ -1,12 +1,15 @@
 import React from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "@/pages/Index";
 
 const App = () => {
   return (
-    <LanguageProvider>
-      <Index />
-    </LanguageProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <LanguageProvider>
+        <Index />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 };
 
