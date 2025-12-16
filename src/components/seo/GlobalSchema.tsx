@@ -28,7 +28,7 @@ const schema = {
 "url": "https://www.luckygen.click/",
 "logo": {
 "@type": "ImageObject",
-"url": "https://www.luckygen.click/logo.png"
+"url": "https://www.luckygen.click/favicon.ico"
 },
 "contactPoint": {
 "@type": "ContactPoint",
