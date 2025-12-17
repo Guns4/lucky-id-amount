@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export default function Footer() {
   return (
     <footer className="mt-12 pt-8 border-t border-border text-center">
@@ -23,7 +22,7 @@ export default function Footer() {
     </footer>
   );
 }
-=======
+
 export default function Footer() {
   return (
     <footer className="mt-12 pt-8 border-t border-border text-center">
@@ -48,4 +47,3 @@ export default function Footer() {
     </footer>
   );
 }
->>>>>>> 97c73a6 (update)
