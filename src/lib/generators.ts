@@ -48,34 +48,98 @@ export interface GeneratedAmount {
 // Lucky numbers commonly used
 const LUCKY_NUMBERS = [7, 8, 9];
 
-// Name bases for ID generation - variety of cool names
-const ID_NAMES = [
-  // Indonesian Mythical & Cultural
-  'Dewa', 'Raja', 'Satria', 'Garuda', 'Ksatria', 'Pangeran', 'Ratu', 'Prabu',
-  'Arjuna', 'Bima', 'Gatotkaca', 'Kresna', 'Semar', 'Petruk', 'Bagong',
-  // Indonesian Nature & Power
-  'Elang', 'Harimau', 'Singa', 'Rajawali', 'Banteng', 'Badak', 'Komodo',
-  // Indonesian Cool Words
-  'Sakti', 'Jaya', 'Wijaya', 'Kusuma', 'Putra', 'Surya', 'Bayu', 'Agung',
-  'Mega', 'Berlian', 'Emas', 'Mutiara', 'Permata', 'Intan',
-  // Dragons & Mythical
-  'Naga', 'Dragon', 'Phoenix', 'Titan', 'Zeus', 'Thor', 'Odin',
-  // Winners & Champions
-  'King', 'Queen', 'Sultan', 'Boss', 'Chief', 'Master', 'Legend', 'Hero',
-  // Luck & Fortune
-  'Lucky', 'Fortune', 'Gold', 'Diamond', 'Crown', 'Royal', 'Elite', 'Prime',
-  // Power
-  'Power', 'Storm', 'Thunder', 'Blaze', 'Fury', 'Ace', 'Max', 'Pro',
-  // Cool names
-  'Viper', 'Cobra', 'Wolf', 'Tiger', 'Lion', 'Eagle', 'Shark', 'Hawk',
-  // Gaming vibes
-  'Gamer', 'Ninja', 'Sniper', 'Hunter', 'Raider', 'Viking', 'Samurai', 'Ronin',
-  // VIP style
-  'VIP', 'MVP', 'Star', 'Flash', 'Bolt', 'Blitz', 'Nova', 'Apex',
-];
+// Comprehensive name collection for professional ID generation
+const ID_NAMES = {
+  // Animals - Powerful & Cool
+  animals: [
+    'Wolf', 'Tiger', 'Lion', 'Eagle', 'Shark', 'Hawk', 'Falcon', 'Panther',
+    'Cobra', 'Viper', 'Dragon', 'Phoenix', 'Bear', 'Jaguar', 'Leopard', 'Raven',
+    'Fox', 'Lynx', 'Puma', 'Raptor', 'Grizzly', 'Mustang', 'Stallion', 'Rhino',
+    'Scorpion', 'Mantis', 'Spider', 'Kraken', 'Griffin', 'Hydra', 'Cerberus',
+  ],
+  
+  // Mythical & Fantasy
+  mythical: [
+    'Titan', 'Zeus', 'Thor', 'Odin', 'Atlas', 'Ares', 'Apollo', 'Hades',
+    'Phoenix', 'Sphinx', 'Minotaur', 'Pegasus', 'Valkyrie', 'Fenrir', 'Loki',
+    'Naga', 'Garuda', 'Dewa', 'Raja', 'Satria', 'Arjuna', 'Bima', 'Kresna',
+    'Merlin', 'Draco', 'Osiris', 'Anubis', 'Ra', 'Poseidon', 'Hercules',
+  ],
+  
+  // Gaming & Esports
+  gaming: [
+    'Ninja', 'Sniper', 'Hunter', 'Raider', 'Viking', 'Samurai', 'Ronin', 'Shadow',
+    'Phantom', 'Ghost', 'Reaper', 'Striker', 'Blader', 'Gunner', 'Tank', 'Healer',
+    'Mage', 'Rogue', 'Paladin', 'Warlord', 'Assassin', 'Berserker', 'Ranger',
+    'Crusader', 'Knight', 'Sentinel', 'Guardian', 'Seeker', 'Slayer', 'Breaker',
+  ],
+  
+  // Tech & Modern
+  tech: [
+    'Pixel', 'Cyber', 'Neo', 'Matrix', 'Vector', 'Quantum', 'Binary', 'Crypto',
+    'Nexus', 'Byte', 'Code', 'Data', 'Node', 'Cloud', 'Nano', 'Turbo',
+    'Sonic', 'Nitro', 'Hyper', 'Ultra', 'Mega', 'Giga', 'Tera', 'Omega',
+    'Alpha', 'Beta', 'Delta', 'Sigma', 'Zero', 'Core', 'Pulse', 'Flux',
+  ],
+  
+  // Power & Status
+  power: [
+    'King', 'Queen', 'Sultan', 'Boss', 'Chief', 'Master', 'Legend', 'Hero',
+    'Champion', 'Victor', 'Conqueror', 'Emperor', 'Prince', 'Duke', 'Lord', 'Baron',
+    'Captain', 'General', 'Admiral', 'Commander', 'Major', 'Colonel', 'Elite', 'Prime',
+    'Ace', 'Pro', 'VIP', 'MVP', 'Star', 'Icon', 'Mogul', 'Tycoon',
+  ],
+  
+  // Nature & Elements
+  nature: [
+    'Storm', 'Thunder', 'Blaze', 'Frost', 'Shadow', 'Dawn', 'Dusk', 'Eclipse',
+    'Aurora', 'Nova', 'Comet', 'Meteor', 'Astro', 'Cosmic', 'Solar', 'Lunar',
+    'Ocean', 'River', 'Mountain', 'Forest', 'Desert', 'Arctic', 'Tropic', 'Volcano',
+    'Crystal', 'Diamond', 'Ruby', 'Jade', 'Onyx', 'Obsidian', 'Emerald', 'Sapphire',
+  ],
+  
+  // Cool Words & Abstract
+  cool: [
+    'Blitz', 'Bolt', 'Flash', 'Spark', 'Flare', 'Blaze', 'Fury', 'Rage',
+    'Havoc', 'Chaos', 'Vortex', 'Apex', 'Zenith', 'Summit', 'Peak', 'Crest',
+    'Edge', 'Blade', 'Steel', 'Iron', 'Titanium', 'Chrome', 'Silver', 'Gold',
+    'Jet', 'Rocket', 'Missile', 'Bullet', 'Arrow', 'Spear', 'Sword', 'Shield',
+  ],
+  
+  // Indonesian Cultural
+  indonesian: [
+    'Sakti', 'Jaya', 'Wijaya', 'Kusuma', 'Putra', 'Surya', 'Bayu', 'Agung',
+    'Berlian', 'Emas', 'Mutiara', 'Permata', 'Intan', 'Megah', 'Cahaya', 'Mentari',
+    'Elang', 'Harimau', 'Singa', 'Rajawali', 'Banteng', 'Badak', 'Komodo', 'Macan',
+    'Pangeran', 'Ratu', 'Prabu', 'Ksatria', 'Pahlawan', 'Perkasa', 'Gagah', 'Berani',
+  ],
+  
+  // Usernames & Internet
+  internet: [
+    'Gamer', 'Player', 'User', 'Guest', 'Member', 'Admin', 'Mod', 'Dev',
+    'Hacker', 'Coder', 'Geek', 'Nerd', 'Noob', 'Newbie', 'Veteran', 'Legend',
+    'Stream', 'Live', 'Online', 'Digital', 'Virtual', 'Web', 'Net', 'Link',
+    'Click', 'Tap', 'Swipe', 'Scroll', 'Like', 'Share', 'Post', 'Chat',
+  ],
+};
+
+// Flatten all names into a single array for random selection
+const ALL_NAMES = Object.values(ID_NAMES).flat();
 
 function getRandomFromArray<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getRandomUniqueName(usedNames: Set<string>): string {
+  const shuffled = shuffleArray([...ALL_NAMES]);
+  for (const name of shuffled) {
+    if (!usedNames.has(name)) {
+      usedNames.add(name);
+      return name;
+    }
+  }
+  // Fallback: return random name if all used
+  return getRandomFromArray(ALL_NAMES);
 }
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -87,7 +151,7 @@ function shuffleArray<T>(arr: T[]): T[] {
   return shuffled;
 }
 
-function generateRepeatingPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true): string {
+function generateRepeatingPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : LUCKY_NUMBERS.filter(n => !exclude.includes(n));
@@ -98,13 +162,13 @@ function generateRepeatingPattern(length: number, favorites: number[], exclude: 
   const numberPart = digit.toString().repeat(Math.min(3, length));
   
   if (includeLetters) {
-    const name = getRandomFromArray(ID_NAMES);
+    const name = usedNames ? getRandomUniqueName(usedNames) : getRandomFromArray(ALL_NAMES);
     return name + numberPart;
   }
   return numberPart;
 }
 
-function generateAscendingPattern(length: number, exclude: number[], includeLetters: boolean = true): string {
+function generateAscendingPattern(length: number, exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const start = Math.floor(Math.random() * 7) + 1; // Start from 1-7
   let result = '';
   const numLength = Math.min(3, length);
@@ -118,13 +182,13 @@ function generateAscendingPattern(length: number, exclude: number[], includeLett
   }
   
   if (includeLetters) {
-    const name = getRandomFromArray(ID_NAMES);
+    const name = usedNames ? getRandomUniqueName(usedNames) : getRandomFromArray(ALL_NAMES);
     return name + result;
   }
   return result;
 }
 
-function generateDescendingPattern(length: number, exclude: number[], includeLetters: boolean = true): string {
+function generateDescendingPattern(length: number, exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const start = Math.floor(Math.random() * 3) + 7; // Start from 7-9
   let result = '';
   const numLength = Math.min(3, length);
@@ -138,13 +202,13 @@ function generateDescendingPattern(length: number, exclude: number[], includeLet
   }
   
   if (includeLetters) {
-    const name = getRandomFromArray(ID_NAMES);
+    const name = usedNames ? getRandomUniqueName(usedNames) : getRandomFromArray(ALL_NAMES);
     return name + result;
   }
   return result;
 }
 
-function generateMirrorPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true): string {
+function generateMirrorPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : [1, 2, 3, 5, 6, 7, 8, 9].filter(n => !exclude.includes(n));
@@ -155,13 +219,13 @@ function generateMirrorPattern(length: number, favorites: number[], exclude: num
   const mirrorPart = `${outer}${inner}${outer}`;
   
   if (includeLetters) {
-    const name = getRandomFromArray(ID_NAMES);
+    const name = usedNames ? getRandomUniqueName(usedNames) : getRandomFromArray(ALL_NAMES);
     return name + mirrorPart;
   }
   return mirrorPart;
 }
 
-function generateDoublePairsPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true): string {
+function generateDoublePairsPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : [1, 2, 3, 5, 6, 7, 8, 9].filter(n => !exclude.includes(n));
@@ -177,7 +241,7 @@ function generateDoublePairsPattern(length: number, favorites: number[], exclude
   }
   
   if (includeLetters) {
-    const name = getRandomFromArray(ID_NAMES);
+    const name = usedNames ? getRandomUniqueName(usedNames) : getRandomFromArray(ALL_NAMES);
     return name + result;
   }
   return result;
@@ -199,8 +263,8 @@ function generateLuckyNumbers(count: number, favorites: number[], exclude: numbe
   return numbers;
 }
 
-function generateNameBasedID(options: IDGeneratorOptions): string {
-  const name = getRandomFromArray(ID_NAMES);
+function generateNameBasedID(options: IDGeneratorOptions, usedNames?: Set<string>): string {
+  const name = usedNames ? getRandomUniqueName(usedNames) : getRandomFromArray(ALL_NAMES);
   const numCount = options.numberSuffixLength || (Math.random() > 0.5 ? 2 : 3);
   
   // If birth year is specified, use it
@@ -213,8 +277,8 @@ function generateNameBasedID(options: IDGeneratorOptions): string {
   return name + numbers;
 }
 
-function generateLuckyCombo(options: IDGeneratorOptions): string {
-  return generateNameBasedID(options);
+function generateLuckyCombo(options: IDGeneratorOptions, usedNames?: Set<string>): string {
+  return generateNameBasedID(options, usedNames);
 }
 
 function calculateIDBeautyScore(id: string): number {
@@ -252,34 +316,34 @@ function calculateIDBeautyScore(id: string): number {
   return Math.min(5, Math.max(1, Math.round(score)));
 }
 
-export function generateID(options: IDGeneratorOptions): GeneratedID {
+export function generateID(options: IDGeneratorOptions, usedNames?: Set<string>): GeneratedID {
   let value: string;
   let pattern: string;
   const includeLetters = options.includeLetters !== false;
   
   switch (options.pattern) {
     case 'repeating':
-      value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters);
+      value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters, usedNames);
       pattern = 'Repeating';
       break;
     case 'ascending':
-      value = generateAscendingPattern(options.length, options.excludeNumbers, includeLetters);
+      value = generateAscendingPattern(options.length, options.excludeNumbers, includeLetters, usedNames);
       pattern = 'Ascending';
       break;
     case 'descending':
-      value = generateDescendingPattern(options.length, options.excludeNumbers, includeLetters);
+      value = generateDescendingPattern(options.length, options.excludeNumbers, includeLetters, usedNames);
       pattern = 'Descending';
       break;
     case 'mirror':
-      value = generateMirrorPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters);
+      value = generateMirrorPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters, usedNames);
       pattern = 'Mirror';
       break;
     case 'double-pairs':
-      value = generateDoublePairsPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters);
+      value = generateDoublePairsPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters, usedNames);
       pattern = 'Double Pairs';
       break;
     case 'lucky-combo':
-      value = generateLuckyCombo(options);
+      value = generateLuckyCombo(options, usedNames);
       pattern = 'Lucky Name';
       break;
     case 'custom-prefix': {
@@ -299,7 +363,7 @@ export function generateID(options: IDGeneratorOptions): GeneratedID {
       break;
     }
     default:
-      value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers);
+      value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters, usedNames);
       pattern = 'Random';
   }
   
@@ -315,14 +379,15 @@ export function generateID(options: IDGeneratorOptions): GeneratedID {
 
 export function generateMultipleIDs(options: IDGeneratorOptions, count: number): GeneratedID[] {
   const ids: GeneratedID[] = [];
-  const patterns: IDPattern[] = ['repeating', 'ascending', 'descending', 'mirror', 'double-pairs', 'lucky-combo'];
+  const patterns: IDPattern[] = ['lucky-combo', 'repeating', 'ascending', 'descending', 'mirror', 'double-pairs'];
+  const usedNames = new Set<string>(); // Track used names for uniqueness
   
   for (let i = 0; i < count; i++) {
     const patternToUse = options.pattern === 'custom-prefix' 
       ? 'custom-prefix' 
       : patterns[i % patterns.length];
     
-    ids.push(generateID({ ...options, pattern: patternToUse }));
+    ids.push(generateID({ ...options, pattern: patternToUse }, usedNames));
   }
   
   return ids.sort((a, b) => b.beautyScore - a.beautyScore);
