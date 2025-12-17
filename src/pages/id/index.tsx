@@ -36,7 +36,7 @@ export default function IndonesianHome() {
         />
         <link rel="canonical" href="https://www.luckygen.click/id/" />
         <html lang="id" />
- efe0758e8793fdcd268ecb7d370aeaa1561c5f59
+efe0758e8793fdcd268ecb7d370aeaa1561c5f59
       </Helmet>
 
       {/* ================= HREFLANG ================= */}
@@ -88,7 +88,7 @@ export default function IndonesianHome() {
       />
 
       {/* ================= CONTENT ================= */}
-=======
+
       <ToolSchema
         name="Generator Lucky ID & Nominal Cantik"
         description="Alat online untuk menghasilkan ID hoki dan nominal saldo cantik populer di Indonesia"
@@ -122,7 +122,7 @@ export default function IndonesianHome() {
       />
 
       {/* ================= CONTENT ================= */}
- efe0758e8793fdcd268ecb7d370aeaa1561c5f59
+efe0758e8793fdcd268ecb7d370aeaa1561c5f59
       <div className="container max-w-2xl mx-auto px-4 pb-12">
         <div className="flex justify-end pt-4">
           <LanguageToggle />
@@ -139,7 +139,7 @@ export default function IndonesianHome() {
             Angka hoki • Nominal saldo cantik • Pola popular Indonesia
 
             Angka hoki • Nominal saldo cantik • Pola populer Indonesia
- efe0758e8793fdcd268ecb7d370aeaa1561c5f59
+efe0758e8793fdcd268ecb7d370aeaa1561c5f59
           </p>
         </div>
 
