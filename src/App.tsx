@@ -25,6 +25,7 @@ const SeoPage = lazy(() => import("@/pages/SeoPage"));
 const DepositGacorSEO = lazy(() => import("@/pages/DepositGacorSEO"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
+
 // ===== Simple fallback loader =====
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center text-sm opacity-70">
