@@ -1,33 +1,34 @@
-// Constants and variants for UI components
-export const badgeVariants = {
-  default: "bg-gray-200 text-gray-800",
-  success: "bg-green-200 text-green-800",
-  warning: "bg-yellow-200 text-yellow-800",
-  destructive: "bg-red-200 text-red-800",
-};
+import { cva, type VariantProps } from "class-variance-authority";
 
-export const buttonVariants = {
-  default: "bg-blue-500 text-white hover:bg-blue-600",
-  gold: "bg-yellow-500 text-black hover:bg-yellow-600",
-};
+export const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground shadow-gold hover:shadow-gold-lg hover:brightness-110 active:scale-[0.98]",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-border bg-transparent hover:bg-secondary hover:border-primary/50 hover:text-primary",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-secondary hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        gold: "bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-gold hover:shadow-gold-lg hover:brightness-110 active:scale-[0.98] font-semibold",
+        "gold-outline": "border-2 border-primary text-primary hover:bg-primary/10 hover:shadow-gold",
+        success: "bg-success text-success-foreground hover:bg-success/90",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-12 rounded-lg px-8 text-base",
+        xl: "h-14 rounded-xl px-10 text-lg",
+        icon: "h-10 w-10",
+        "icon-sm": "h-8 w-8",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
 
-export const toggleVariants = {
-  default: "bg-gray-300",
-  active: "bg-blue-500",
-};
-
-export const sidebarVariants = {
-  background: "bg-gray-50",
-  foreground: "text-gray-900",
-  primary: "text-blue-600",
-  accent: "text-yellow-500",
-};
-
-export const navigationMenuVariants = {
-  item: "px-4 py-2 hover:bg-gray-100",
-};
-
-export const sonnerVariants = {
-  success: "bg-green-500 text-white",
-  error: "bg-red-500 text-white",
-};
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
