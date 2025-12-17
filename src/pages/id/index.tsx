@@ -5,13 +5,13 @@ import { Header } from "@/components/Header";
 import { TipsSection } from "@/components/TipsSection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import Footer from "@/components/footer/Footer";
+import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 import AutoHreflang from "@/components/seo/AutoHreflang";
 import PageSchema from "@/components/seo/PageSchema";
 
-const IDGenerator = lazy(() => import("@/components/IDGenerator"));
-const AmountGenerator = lazy(() => import("@/components/AmountGenerator"));
+const IDGenerator = lazy(() => import("@/components/IDGenerator").then(m => ({ default: m.IDGenerator })));
+const AmountGenerator = lazy(() => import("@/components/AmountGenerator").then(m => ({ default: m.AmountGenerator })));
 const NativeBanner = lazy(() => import("@/components/ads/NativeBanner"));
 
 type TabType = "id" | "amount";

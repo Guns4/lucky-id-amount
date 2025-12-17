@@ -87,7 +87,7 @@ function shuffleArray<T>(arr: T[]): T[] {
   return shuffled;
 }
 
-function generateRepeatingPattern(length: number, favorites: number[], exclude: number[]): string {
+function generateRepeatingPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : LUCKY_NUMBERS.filter(n => !exclude.includes(n));
@@ -95,13 +95,20 @@ function generateRepeatingPattern(length: number, favorites: number[], exclude: 
   if (available.length === 0) return '8'.repeat(length);
   
   const digit = getRandomFromArray(available);
-  return digit.toString().repeat(length);
+  const numberPart = digit.toString().repeat(Math.min(3, length));
+  
+  if (includeLetters) {
+    const name = getRandomFromArray(ID_NAMES);
+    return name + numberPart;
+  }
+  return numberPart;
 }
 
-function generateAscendingPattern(length: number, exclude: number[]): string {
-  const start = Math.floor(Math.random() * (10 - length));
+function generateAscendingPattern(length: number, exclude: number[], includeLetters: boolean = true): string {
+  const start = Math.floor(Math.random() * 7) + 1; // Start from 1-7
   let result = '';
-  for (let i = 0; i < length; i++) {
+  const numLength = Math.min(3, length);
+  for (let i = 0; i < numLength; i++) {
     const digit = (start + i) % 10;
     if (exclude.includes(digit)) {
       result += ((digit + 1) % 10).toString();
@@ -109,13 +116,19 @@ function generateAscendingPattern(length: number, exclude: number[]): string {
       result += digit.toString();
     }
   }
+  
+  if (includeLetters) {
+    const name = getRandomFromArray(ID_NAMES);
+    return name + result;
+  }
   return result;
 }
 
-function generateDescendingPattern(length: number, exclude: number[]): string {
-  const start = Math.max(length - 1, Math.floor(Math.random() * 4) + length);
+function generateDescendingPattern(length: number, exclude: number[], includeLetters: boolean = true): string {
+  const start = Math.floor(Math.random() * 3) + 7; // Start from 7-9
   let result = '';
-  for (let i = 0; i < length; i++) {
+  const numLength = Math.min(3, length);
+  for (let i = 0; i < numLength; i++) {
     const digit = Math.abs((start - i) % 10);
     if (exclude.includes(digit)) {
       result += ((digit + 1) % 10).toString();
@@ -123,38 +136,51 @@ function generateDescendingPattern(length: number, exclude: number[]): string {
       result += digit.toString();
     }
   }
+  
+  if (includeLetters) {
+    const name = getRandomFromArray(ID_NAMES);
+    return name + result;
+  }
   return result;
 }
 
-function generateMirrorPattern(length: number, favorites: number[], exclude: number[]): string {
-  const half = Math.ceil(length / 2);
+function generateMirrorPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : [1, 2, 3, 5, 6, 7, 8, 9].filter(n => !exclude.includes(n));
   
-  let firstHalf = '';
-  for (let i = 0; i < half; i++) {
-    firstHalf += getRandomFromArray(available).toString();
-  }
+  // Generate mirror pattern like 696, 787, 818
+  const outer = getRandomFromArray(available);
+  const inner = getRandomFromArray(available.filter(n => n !== outer));
+  const mirrorPart = `${outer}${inner}${outer}`;
   
-  const secondHalf = firstHalf.split('').reverse().join('');
-  return (firstHalf + secondHalf).slice(0, length);
+  if (includeLetters) {
+    const name = getRandomFromArray(ID_NAMES);
+    return name + mirrorPart;
+  }
+  return mirrorPart;
 }
 
-function generateDoublePairsPattern(length: number, favorites: number[], exclude: number[]): string {
+function generateDoublePairsPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : [1, 2, 3, 5, 6, 7, 8, 9].filter(n => !exclude.includes(n));
   
+  // Generate pairs like 1122, 7788
+  const shuffled = shuffleArray(available);
   let result = '';
-  const pairs = Math.ceil(length / 2);
+  const pairs = 2; // Always 2 pairs for cleaner look
   
   for (let i = 0; i < pairs; i++) {
-    const digit = getRandomFromArray(available);
+    const digit = shuffled[i % shuffled.length];
     result += digit.toString().repeat(2);
   }
   
-  return result.slice(0, length);
+  if (includeLetters) {
+    const name = getRandomFromArray(ID_NAMES);
+    return name + result;
+  }
+  return result;
 }
 
 function generateLuckyNumbers(count: number, favorites: number[], exclude: number[]): string {
@@ -229,26 +255,27 @@ function calculateIDBeautyScore(id: string): number {
 export function generateID(options: IDGeneratorOptions): GeneratedID {
   let value: string;
   let pattern: string;
+  const includeLetters = options.includeLetters !== false;
   
   switch (options.pattern) {
     case 'repeating':
-      value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers);
+      value = generateRepeatingPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters);
       pattern = 'Repeating';
       break;
     case 'ascending':
-      value = generateAscendingPattern(options.length, options.excludeNumbers);
+      value = generateAscendingPattern(options.length, options.excludeNumbers, includeLetters);
       pattern = 'Ascending';
       break;
     case 'descending':
-      value = generateDescendingPattern(options.length, options.excludeNumbers);
+      value = generateDescendingPattern(options.length, options.excludeNumbers, includeLetters);
       pattern = 'Descending';
       break;
     case 'mirror':
-      value = generateMirrorPattern(options.length, options.favoriteNumbers, options.excludeNumbers);
+      value = generateMirrorPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters);
       pattern = 'Mirror';
       break;
     case 'double-pairs':
-      value = generateDoublePairsPattern(options.length, options.favoriteNumbers, options.excludeNumbers);
+      value = generateDoublePairsPattern(options.length, options.favoriteNumbers, options.excludeNumbers, includeLetters);
       pattern = 'Double Pairs';
       break;
     case 'lucky-combo':
