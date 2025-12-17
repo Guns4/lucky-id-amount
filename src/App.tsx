@@ -5,28 +5,27 @@ import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-// ===== SEO (GLOBAL) =====
+// ===== GLOBAL SEO =====
 import AutoMeta from "@/components/seo/AutoMeta";
 import GlobalSchema from "@/components/seo/GlobalSchema";
 
-// ===== Home Pages (language specific) =====
-import EnglishHome from "@/pages/en";
-import IndonesianHome from "@/pages/id";
+// ===== PAGES =====
+import EnglishHome from "@/pages/En";
+import IndonesianHome from "@/pages/Id";
 
-// ===== Legal Pages (eager load: small & SEO critical) =====
+// ===== LEGAL (Adsense Required) =====
 import PrivacyPolicy from "@/pages/legal/PrivacyPolicy";
 import TermsOfService from "@/pages/legal/TermsOfService";
 import AboutUs from "@/pages/legal/AboutUs";
 import Contact from "@/pages/legal/Contact";
 
-// ===== Lazy-loaded SEO / Utility Pages =====
+// ===== LAZY =====
 const SeoIndex = lazy(() => import("@/pages/SeoIndex"));
 const SeoPage = lazy(() => import("@/pages/SeoPage"));
 const DepositGacorSEO = lazy(() => import("@/pages/DepositGacorSEO"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
-
-// ===== Simple fallback loader =====
+// ===== FALLBACK =====
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center text-sm opacity-70">
     Loading…
@@ -40,19 +39,19 @@ export default function App() {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <LanguageProvider>
 
-            {/* ===== GLOBAL SEO (AUTO) ===== */}
+            {/* ===== GLOBAL SEO ===== */}
             <AutoMeta />
             <GlobalSchema />
 
             <Suspense fallback={<PageLoader />}>
               <Routes>
 
-                {/* ===== Language Routes ===== */}
+                {/* ===== MAIN ROUTES ===== */}
                 <Route path="/" element={<EnglishHome />} />
                 <Route path="/en" element={<EnglishHome />} />
                 <Route path="/id" element={<IndonesianHome />} />
 
-                {/* ===== SEO Pages ===== */}
+                {/* ===== SEO CONTENT ===== */}
                 <Route path="/seo" element={<SeoIndex />} />
                 <Route path="/seo/:slug" element={<SeoPage />} />
                 <Route
@@ -60,7 +59,7 @@ export default function App() {
                   element={<DepositGacorSEO />}
                 />
 
-                {/* ===== Legal Pages (Adsense Required) ===== */}
+                {/* ===== LEGAL ===== */}
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/about-us" element={<AboutUs />} />
