@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -33,43 +34,45 @@ const PageLoader = () => (
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        <LanguageProvider>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <LanguageProvider>
 
-          {/* ===== GLOBAL SEO (AUTO) ===== */}
-          <AutoMeta />
-          <GlobalSchema />
+            {/* ===== GLOBAL SEO (AUTO) ===== */}
+            <AutoMeta />
+            <GlobalSchema />
 
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
 
-              {/* ===== Language Routes ===== */}
-              <Route path="/" element={<EnglishHome />} />
-              <Route path="/en" element={<EnglishHome />} />
-              <Route path="/id" element={<IndonesianHome />} />
+                {/* ===== Language Routes ===== */}
+                <Route path="/" element={<EnglishHome />} />
+                <Route path="/en" element={<EnglishHome />} />
+                <Route path="/id" element={<IndonesianHome />} />
 
-              {/* ===== SEO Pages ===== */}
-              <Route path="/seo" element={<SeoIndex />} />
-              <Route path="/seo/:slug" element={<SeoPage />} />
-              <Route
-                path="/lucky-amount-generator"
-                element={<DepositGacorSEO />}
-              />
+                {/* ===== SEO Pages ===== */}
+                <Route path="/seo" element={<SeoIndex />} />
+                <Route path="/seo/:slug" element={<SeoPage />} />
+                <Route
+                  path="/lucky-amount-generator"
+                  element={<DepositGacorSEO />}
+                />
 
-              {/* ===== Legal Pages (Adsense Required) ===== */}
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
+                {/* ===== Legal Pages (Adsense Required) ===== */}
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact" element={<Contact />} />
 
-              {/* ===== 404 ===== */}
-              <Route path="*" element={<NotFound />} />
+                {/* ===== 404 ===== */}
+                <Route path="*" element={<NotFound />} />
 
-            </Routes>
-          </Suspense>
-        </LanguageProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+              </Routes>
+            </Suspense>
+          </LanguageProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
