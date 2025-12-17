@@ -377,20 +377,33 @@ export function generateID(options: IDGeneratorOptions, usedNames?: Set<string>)
   };
 }
 
-export function generateMultipleIDs(options: IDGeneratorOptions, count: number): GeneratedID[] {
-  const ids: GeneratedID[] = [];
-  const patterns: IDPattern[] = ['lucky-combo', 'repeating', 'ascending', 'descending', 'mirror', 'double-pairs'];
-  const usedNames = new Set<string>(); // Track used names for uniqueness
+export function generateMultipleIDs(options: IDGeneratorOptions, count: number = 3): GeneratedID[] {
+  const usedNames = new Set<string>();
+  const results: GeneratedID[] = [];
   
-  for (let i = 0; i < count; i++) {
+  // Quality tiers: Perfect (5), Medium (3), Low (1-2)
+  const qualityTiers = [
+    { tier: 'Perfect', targetScore: 5, patterns: ['lucky-combo', 'repeating', 'mirror'] as IDPattern[] },
+    { tier: 'Medium', targetScore: 3, patterns: ['ascending', 'descending', 'double-pairs'] as IDPattern[] },
+    { tier: 'Low', targetScore: 2, patterns: ['lucky-combo', 'ascending', 'descending'] as IDPattern[] },
+  ];
+  
+  for (let i = 0; i < Math.min(count, 3); i++) {
+    const tier = qualityTiers[i];
     const patternToUse = options.pattern === 'custom-prefix' 
       ? 'custom-prefix' 
-      : patterns[i % patterns.length];
+      : getRandomFromArray(tier.patterns);
     
-    ids.push(generateID({ ...options, pattern: patternToUse }, usedNames));
+    const id = generateID({ ...options, pattern: patternToUse }, usedNames);
+    
+    // Adjust beauty score based on tier
+    results.push({
+      ...id,
+      beautyScore: tier.targetScore,
+    });
   }
   
-  return ids.sort((a, b) => b.beautyScore - a.beautyScore);
+  return results;
 }
 
 // Amount Generation
