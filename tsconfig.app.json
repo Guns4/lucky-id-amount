@@ -1,30 +1,44 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
+    /* Basic Options */
+    "target": "ES2020",                   // Output JavaScript target
+    "module": "ESNext",                   // Module code generation
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    "jsx": "react-jsx",                   // Support React 17+ JSX transform
+    "declaration": false,                 // Generate .d.ts files
+    "sourceMap": true,                    // Enable sourcemaps
+    "outDir": "./dist",                    // Output folder
+    "rootDir": "./src",                   // Root folder for source files
+    "removeComments": true,
+    "noEmit": true,                       // Do not emit output files
+    "incremental": true,                  // Enable incremental compilation
+    "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
+    /* Module Resolution */
+    "moduleResolution": "bundler",        // Suitable for modern bundlers
+    "resolveJsonModule": true,            // Allow import of JSON
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
 
-    /* Linting */
-    "strict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": false,
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "useDefineForClassFields": true,
 
-    "baseUrl": ".",
+    /* Paths and Aliases */
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* Skip Checks for Dependencies */
+    "skipLibCheck": true
   },
-  "include": ["src"]
+
+  /* Include / Exclude */
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "build"]
 }
