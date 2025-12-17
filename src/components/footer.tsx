@@ -1,4 +1,4 @@
-export default function Footer() {
+export default function footer() {
   return (
     <footer className="mt-12 pt-8 border-t border-border text-center">
       <div className="flex flex-wrap justify-center gap-4 text-sm mb-4">
@@ -23,7 +23,7 @@ export default function Footer() {
   );
 }
 
-export default function Footer() {
+export default function footer() {
   return (
     <footer className="mt-12 pt-8 border-t border-border text-center">
       <div className="flex flex-wrap justify-center gap-4 text-sm mb-4">
