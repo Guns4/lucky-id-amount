@@ -36,6 +36,7 @@ export default function IndonesianHome() {
         />
         <link rel="canonical" href="https://www.luckygen.click/id/" />
         <html lang="id" />
+ efe0758e8793fdcd268ecb7d370aeaa1561c5f59
       </Helmet>
 
       {/* ================= HREFLANG ================= */}
@@ -54,6 +55,40 @@ export default function IndonesianHome() {
         url="https://www.luckygen.click/id/"
       />
 
+      <ToolSchema
+        name="Generator Lucky ID & Nominal Cantik"
+        description="Alat online untuk menghasilkan ID hoki dan nominal saldo cantik popular di Indonesia"
+        url="https://www.luckygen.click/id/"
+        inLanguage="id-ID"
+      />
+
+      <FaqSchema
+        faqs={[
+          {
+            question: "Apa itu Lucky ID?",
+            answer:
+              "Lucky ID adalah pola angka tertentu yang dipercaya membawa keberuntungan dan sering digunakan sebagai ID akun atau nomor transaksi.",
+          },
+          {
+            question: "Apa itu nominal cantik?",
+            answer:
+              "Nominal cantik adalah angka saldo atau deposit dengan pola unik seperti kembar, berurutan, atau simetris.",
+          },
+          {
+            question: "Apakah LuckyGen gratis digunakan?",
+            answer:
+              "Ya. LuckyGen 100% gratis dan dapat digunakan tanpa registrasi atau login.",
+          },
+          {
+            question: "Apakah hasil generator ini acak?",
+            answer:
+              "Hasil dihasilkan secara acak berdasarkan pola popular yang sering digunakan oleh pengguna.",
+          },
+        ]}
+      />
+
+      {/* ================= CONTENT ================= */}
+=======
       <ToolSchema
         name="Generator Lucky ID & Nominal Cantik"
         description="Alat online untuk menghasilkan ID hoki dan nominal saldo cantik populer di Indonesia"
@@ -87,6 +122,7 @@ export default function IndonesianHome() {
       />
 
       {/* ================= CONTENT ================= */}
+ efe0758e8793fdcd268ecb7d370aeaa1561c5f59
       <div className="container max-w-2xl mx-auto px-4 pb-12">
         <div className="flex justify-end pt-4">
           <LanguageToggle />
@@ -99,7 +135,11 @@ export default function IndonesianHome() {
             Generator Lucky ID & Nominal Cantik
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
+
+            Angka hoki • Nominal saldo cantik • Pola popular Indonesia
+
             Angka hoki • Nominal saldo cantik • Pola populer Indonesia
+ efe0758e8793fdcd268ecb7d370aeaa1561c5f59
           </p>
         </div>
 
