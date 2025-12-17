@@ -47,7 +47,7 @@ export function IDGenerator() {
   const [excludeNumbers, setExcludeNumbers] = useState("4");
   const [includeLetters, setIncludeLetters] = useState(true);
   const [customName, setCustomName] = useState("");
-  const [bulkCount, setBulkCount] = useState(5);
+  const [bulkCount] = useState(3); // Fixed to 3 results: Perfect, Medium, Low
   const [numberSuffixLength, setNumberSuffixLength] = useState(2);
   const [useUppercase, setUseUppercase] = useState(true);
   const [includeBirthYear, setIncludeBirthYear] = useState(false);
