@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { TipsSection } from "@/components/TipsSection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
 // ===== SEO =====
