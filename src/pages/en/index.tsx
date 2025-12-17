@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { TipsSection } from "@/components/TipsSection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import Footer from "@/components/footer";
+import Footer from "@/components/footer/Footer";
 import { cn } from "@/lib/utils";
 
 // ===== SEO =====
@@ -15,13 +15,9 @@ import PageSchema from "@/components/seo/PageSchema";
 import ToolSchema from "@/components/seo/ToolSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
 
-
+// ===== Lazy loaded components (SAFE) =====
 const IDGenerator = lazy(() => import("@/components/IDGenerator"));
 const AmountGenerator = lazy(() => import("@/components/AmountGenerator"));
-
-const IDGenerator = lazy(() => import("@/components/IDGenerator").then(m => ({ default: m.IDGenerator })));
-const AmountGenerator = lazy(() => import("@/components/AmountGenerator").then(m => ({ default: m.AmountGenerator })));
-b5911894d265e6a1987745737c446bd93826c3c4
 const NativeBanner = lazy(() => import("@/components/ads/NativeBanner"));
 
 type TabType = "id" | "amount";
@@ -31,34 +27,42 @@ export default function EnglishHome() {
 
   return (
     <div className="min-h-screen">
-      {/* ===== BASIC SEO ===== */}
+      {/* ================= SEO META ================= */}
       <Helmet>
         <html lang="en" />
         <title>Lucky ID & Beautiful Number Generator | LuckyGen</title>
         <meta
           name="description"
-          content="Generate lucky IDs and beautiful deposit number patterns instantly. Free online lucky number generator for global users." />
-        <link rel="canonical" href="https://www.luckygen.click/en" />
+          content="Generate lucky IDs and beautiful deposit number patterns instantly. Free online lucky number generator for global users."
+        />
+        <link rel="canonical" href="https://www.luckygen.click/en/" />
       </Helmet>
 
-      {/* ===== MULTILINGUAL ===== */}
-      <AutoHreflang />
+      {/* ================= HREFLANG ================= */}
+      <AutoHreflang
+        canonical="https://www.luckygen.click/en/"
+        alternates={{
+          en: "https://www.luckygen.click/en/",
+          id: "https://www.luckygen.click/id/",
+        }}
+      />
 
-      {/* ===== SCHEMA ===== */}
+      {/* ================= SCHEMA ================= */}
       <PageSchema
         name="LuckyGen – Lucky ID & Amount Generator"
         description="Generate lucky IDs and beautiful number patterns globally using LuckyGen online tool."
-        url="https://www.luckygen.click/en"
+        url="https://www.luckygen.click/en/"
       />
 
       <ToolSchema
-        name="LuckyGen Lucky ID & Deposit Amount Generator"
-        description="Free online tool to generate lucky IDs and beautiful deposit amount patterns worldwide."
-        url="https://www.luckygen.click/en"
+        name="Lucky ID & Deposit Amount Generator"
+        description="Free online tool to generate lucky IDs and beautiful deposit number patterns worldwide."
+        url="https://www.luckygen.click/en/"
+        inLanguage="en-US"
       />
 
       <FaqSchema
-        items={[
+        faqs={[
           {
             question: "What is LuckyGen?",
             answer:
@@ -77,7 +81,7 @@ export default function EnglishHome() {
         ]}
       />
 
-      {/* ===== CONTENT ===== */}
+      {/* ================= CONTENT ================= */}
       <div className="container max-w-2xl mx-auto px-4 pb-12">
         <div className="flex justify-end pt-4">
           <LanguageToggle />
@@ -94,7 +98,7 @@ export default function EnglishHome() {
           </p>
         </div>
 
-        {/* ===== TAB NAVIGATION ===== */}
+        {/* ================= TABS ================= */}
         <div className="glass-card rounded-2xl p-1.5 mb-6 flex">
           <button
             onClick={() => setActiveTab("id")}
@@ -121,19 +125,18 @@ export default function EnglishHome() {
           </button>
         </div>
 
-        {/* ===== GENERATOR ===== */}
-        <Suspense fallback={<div className="text-center py-6">Loading...</div>}>
+        {/* ================= GENERATOR ================= */}
+        <Suspense fallback={<div className="text-center py-6">Loading…</div>}>
           {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
         </Suspense>
 
-        {/* ===== ADS ===== */}
+        {/* ================= ADS ================= */}
         <div className="my-8">
           <Suspense fallback={null}>
             <NativeBanner />
           </Suspense>
         </div>
 
-        {/* ===== TRUST CONTENT ===== */}
         <TipsSection />
         <Disclaimer />
         <Footer />

@@ -6,16 +6,18 @@ import { Header } from "@/components/Header";
 import { TipsSection } from "@/components/TipsSection";
 import { Disclaimer } from "@/components/Disclaimer";
 import { LanguageToggle } from "@/components/LanguageToggle";
-import Footer from "@/components/footer";
+import Footer from "@/components/footer/Footer";
 import { cn } from "@/lib/utils";
 
+// ===== SEO =====
 import AutoHreflang from "@/components/seo/AutoHreflang";
 import PageSchema from "@/components/seo/PageSchema";
 import ToolSchema from "@/components/seo/ToolSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
 
-const IDGenerator = lazy(() => import("@/components/IDGenerator").then(m => ({ default: m.IDGenerator })));
-const AmountGenerator = lazy(() => import("@/components/AmountGenerator").then(m => ({ default: m.AmountGenerator })));
+// ===== Lazy loaded components =====
+const IDGenerator = lazy(() => import("@/components/IDGenerator"));
+const AmountGenerator = lazy(() => import("@/components/AmountGenerator"));
 const NativeBanner = lazy(() => import("@/components/ads/NativeBanner"));
 
 type TabType = "id" | "amount";
@@ -27,16 +29,13 @@ export default function IndonesianHome() {
     <div className="min-h-screen">
       {/* ================= SEO META ================= */}
       <Helmet>
-        <title>
-          Generator Lucky ID & Nominal Cantik | LuckyGen Indonesia
-        </title>
+        <html lang="id" />
+        <title>Generator Lucky ID & Nominal Cantik | LuckyGen Indonesia</title>
         <meta
           name="description"
-          content="Generator Lucky ID, angka hoki, dan nominal saldo cantik yang populer di Indonesia. Gratis, cepat, dan mudah digunakan tanpa login."
+          content="Generator Lucky ID, angka hoki, dan nominal saldo cantik populer di Indonesia. Gratis, cepat, dan tanpa login."
         />
         <link rel="canonical" href="https://www.luckygen.click/id/" />
-        <html lang="id" />
-
       </Helmet>
 
       {/* ================= HREFLANG ================= */}
@@ -54,40 +53,6 @@ export default function IndonesianHome() {
         description="Generator Lucky ID dan Nominal Cantik online untuk pengguna Indonesia"
         url="https://www.luckygen.click/id/"
       />
-
-      <ToolSchema
-        name="Generator Lucky ID & Nominal Cantik"
-        description="Alat online untuk menghasilkan ID hoki dan nominal saldo cantik popular di Indonesia"
-        url="https://www.luckygen.click/id/"
-        inLanguage="id-ID"
-      />
-
-      <FaqSchema
-        faqs={[
-          {
-            question: "Apa itu Lucky ID?",
-            answer:
-              "Lucky ID adalah pola angka tertentu yang dipercaya membawa keberuntungan dan sering digunakan sebagai ID akun atau nomor transaksi.",
-          },
-          {
-            question: "Apa itu nominal cantik?",
-            answer:
-              "Nominal cantik adalah angka saldo atau deposit dengan pola unik seperti kembar, berurutan, atau simetris.",
-          },
-          {
-            question: "Apakah LuckyGen gratis digunakan?",
-            answer:
-              "Ya. LuckyGen 100% gratis dan dapat digunakan tanpa registrasi atau login.",
-          },
-          {
-            question: "Apakah hasil generator ini acak?",
-            answer:
-              "Hasil dihasilkan secara acak berdasarkan pola popular yang sering digunakan oleh pengguna.",
-          },
-        ]}
-      />
-
-      {/* ================= CONTENT ================= */}
 
       <ToolSchema
         name="Generator Lucky ID & Nominal Cantik"
@@ -122,7 +87,6 @@ export default function IndonesianHome() {
       />
 
       {/* ================= CONTENT ================= */}
-
       <div className="container max-w-2xl mx-auto px-4 pb-12">
         <div className="flex justify-end pt-4">
           <LanguageToggle />
@@ -135,14 +99,11 @@ export default function IndonesianHome() {
             Generator Lucky ID & Nominal Cantik
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-
-            Angka hoki • Nominal saldo cantik • Pola popular Indonesia
-
             Angka hoki • Nominal saldo cantik • Pola populer Indonesia
-
           </p>
         </div>
 
+        {/* ================= TABS ================= */}
         <div className="glass-card rounded-2xl p-1.5 mb-6 flex">
           <button
             onClick={() => setActiveTab("id")}
@@ -169,10 +130,12 @@ export default function IndonesianHome() {
           </button>
         </div>
 
-        <Suspense fallback={<div className="text-center py-6">Memuat...</div>}>
+        {/* ================= GENERATOR ================= */}
+        <Suspense fallback={<div className="text-center py-6">Memuat…</div>}>
           {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
         </Suspense>
 
+        {/* ================= ADS ================= */}
         <div className="my-8">
           <Suspense fallback={null}>
             <NativeBanner />
