@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, lazy, Suspense } from "react";
 import { Hash, Banknote } from "lucide-react";
 import { Helmet } from "react-helmet-async";
@@ -144,3 +145,151 @@ export default function EnglishHome() {
     </div>
   );
 }
+=======
+import { useState, lazy, Suspense } from "react";
+import { Hash, Banknote } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+
+import { Header } from "@/components/Header";
+import { TipsSection } from "@/components/TipsSection";
+import { Disclaimer } from "@/components/Disclaimer";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import Footer from "@/components/footer";
+import { cn } from "@/lib/utils";
+
+// ===== SEO =====
+import AutoHreflang from "@/components/seo/AutoHreflang";
+import PageSchema from "@/components/seo/PageSchema";
+import ToolSchema from "@/components/seo/ToolSchema";
+import FaqSchema from "@/components/seo/FaqSchema";
+
+// ===== Lazy loaded components (SAFE) =====
+const IDGenerator = lazy(() => import("@/components/IDGenerator"));
+const AmountGenerator = lazy(() => import("@/components/AmountGenerator"));
+const NativeBanner = lazy(() => import("@/components/ads/NativeBanner"));
+
+type TabType = "id" | "amount";
+
+export default function EnglishHome() {
+  const [activeTab, setActiveTab] = useState<TabType>("id");
+
+  return (
+    <div className="min-h-screen">
+      {/* ================= SEO META ================= */}
+      <Helmet>
+        <html lang="en" />
+        <title>Lucky ID & Beautiful Number Generator | LuckyGen</title>
+        <meta
+          name="description"
+          content="Generate lucky IDs and beautiful deposit number patterns instantly. Free online lucky number generator for global users."
+        />
+        <link rel="canonical" href="https://www.luckygen.click/en/" />
+      </Helmet>
+
+      {/* ================= HREFLANG ================= */}
+      <AutoHreflang
+        canonical="https://www.luckygen.click/en/"
+        alternates={{
+          en: "https://www.luckygen.click/en/",
+          id: "https://www.luckygen.click/id/",
+        }}
+      />
+
+      {/* ================= SCHEMA ================= */}
+      <PageSchema
+        name="LuckyGen – Lucky ID & Amount Generator"
+        description="Generate lucky IDs and beautiful number patterns globally using LuckyGen online tool."
+        url="https://www.luckygen.click/en/"
+      />
+
+      <ToolSchema
+        name="Lucky ID & Deposit Amount Generator"
+        description="Free online tool to generate lucky IDs and beautiful deposit number patterns worldwide."
+        url="https://www.luckygen.click/en/"
+        inLanguage="en-US"
+      />
+
+      <FaqSchema
+        faqs={[
+          {
+            question: "What is LuckyGen?",
+            answer:
+              "LuckyGen is a free online tool that helps generate lucky IDs and beautiful number patterns for reference and entertainment purposes.",
+          },
+          {
+            question: "Is LuckyGen free to use?",
+            answer:
+              "Yes. LuckyGen is completely free and can be accessed globally without registration.",
+          },
+          {
+            question: "Do generated numbers guarantee winning?",
+            answer:
+              "No. All generated numbers are for entertainment and pattern inspiration only and do not guarantee any outcome.",
+          },
+        ]}
+      />
+
+      {/* ================= CONTENT ================= */}
+      <div className="container max-w-2xl mx-auto px-4 pb-12">
+        <div className="flex justify-end pt-4">
+          <LanguageToggle />
+        </div>
+
+        <Header />
+
+        <div className="text-center mt-6 mb-4">
+          <h1 className="text-xl font-semibold">
+            Generate Lucky ID & Deposit Amount
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Lucky number patterns • Beautiful numbers • Global friendly
+          </p>
+        </div>
+
+        {/* ================= TABS ================= */}
+        <div className="glass-card rounded-2xl p-1.5 mb-6 flex">
+          <button
+            onClick={() => setActiveTab("id")}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium transition-all",
+              activeTab === "id"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground"
+            )}
+          >
+            <Hash className="w-4 h-4" /> Lucky ID
+          </button>
+
+          <button
+            onClick={() => setActiveTab("amount")}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium transition-all",
+              activeTab === "amount"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground"
+            )}
+          >
+            <Banknote className="w-4 h-4" /> Deposit Amount
+          </button>
+        </div>
+
+        {/* ================= GENERATOR ================= */}
+        <Suspense fallback={<div className="text-center py-6">Loading…</div>}>
+          {activeTab === "id" ? <IDGenerator /> : <AmountGenerator />}
+        </Suspense>
+
+        {/* ================= ADS ================= */}
+        <div className="my-8">
+          <Suspense fallback={null}>
+            <NativeBanner />
+          </Suspense>
+        </div>
+
+        <TipsSection />
+        <Disclaimer />
+        <Footer />
+      </div>
+    </div>
+  );
+}
+>>>>>>> 97c73a6 (update)
