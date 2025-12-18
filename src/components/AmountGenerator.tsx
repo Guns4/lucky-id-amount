@@ -28,7 +28,7 @@ export function AmountGenerator() {
   const [minAmount, setMinAmount] = useState("50000");
   const [maxAmount, setMaxAmount] = useState("1000000");
   const [includeDecimals, setIncludeDecimals] = useState(false);
-  const [bulkCount, setBulkCount] = useState(5);
+  const bulkCount = 3; // Fixed to 3 for quality tiers: Perfect, Medium, Low
 
   const CATEGORIES: {
     value: AmountCategory["type"];
@@ -179,20 +179,8 @@ export function AmountGenerator() {
 
           <div className="flex items-center gap-2">
             <Label className="text-xs text-muted-foreground">
-              {t("generateCount")}
+              {t("results")}: 3 (Perfect, Medium, Low)
             </Label>
-            <Input
-              type="number"
-              value={bulkCount}
-              onChange={(e) =>
-                setBulkCount(
-                  Math.min(10, Math.max(1, Number(e.target.value) || 5))
-                )
-              }
-              className="w-16 font-mono text-center"
-              min={1}
-              max={10}
-            />
           </div>
         </div>
 
