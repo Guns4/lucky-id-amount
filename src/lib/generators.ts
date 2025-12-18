@@ -541,16 +541,30 @@ export function generateAmount(options: AmountGeneratorOptions): GeneratedAmount
   };
 }
 
-export function generateMultipleAmounts(options: AmountGeneratorOptions, count: number): GeneratedAmount[] {
-  const amounts: GeneratedAmount[] = [];
-  const categories: AmountCategory['type'][] = ['lucky', 'unique-odd', 'psychological', 'round-beautiful', 'balanced'];
+export function generateMultipleAmounts(options: AmountGeneratorOptions, count: number = 3): GeneratedAmount[] {
+  const results: GeneratedAmount[] = [];
   
-  for (let i = 0; i < count; i++) {
-    const categoryToUse = options.category || categories[i % categories.length];
-    amounts.push(generateAmount({ ...options, category: categoryToUse }));
+  // Quality tiers: Perfect (5), Medium (3), Low (2)
+  const qualityTiers = [
+    { tier: 'Perfect', targetScore: 5, categories: ['lucky', 'round-beautiful'] as AmountCategory['type'][] },
+    { tier: 'Medium', targetScore: 3, categories: ['psychological', 'unique-odd'] as AmountCategory['type'][] },
+    { tier: 'Low', targetScore: 2, categories: ['balanced', 'unique-odd'] as AmountCategory['type'][] },
+  ];
+  
+  for (let i = 0; i < Math.min(count, 3); i++) {
+    const tier = qualityTiers[i];
+    const categoryToUse = getRandomFromArray(tier.categories);
+    const amount = generateAmount({ ...options, category: categoryToUse });
+    
+    // Adjust beauty score and label based on tier
+    results.push({
+      ...amount,
+      beautyScore: tier.targetScore,
+      category: `${amount.category} (${tier.tier})`,
+    });
   }
   
-  return amounts.sort((a, b) => b.beautyScore - a.beautyScore);
+  return results;
 }
 
 // Presets
