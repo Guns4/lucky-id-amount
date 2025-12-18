@@ -1,18 +1,9 @@
 import { useState, useCallback } from "react";
-import {
-  Sparkles,
-  Shuffle,
-  Settings2,
-  Zap,
-  Globe,
-} from "lucide-react";
+import { Sparkles, Shuffle, Zap, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
 import { GeneratedItem } from "./GeneratedItem";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface WindowWithClarity extends Window {
   clarity?: (event: string, data: string) => void;
@@ -30,28 +21,25 @@ import NativeBanner from "@/components/ads/NativeBanner";
 
 import { openSmartlink } from "@/lib/smartlink";
 
-export function IDGenerator() {
-  const { t } = useLanguage();
-
+export default function IDGenerator() {
   const [results, setResults] = useState<GeneratedID[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
 
   // Required
   const [siteName, setSiteName] = useState("");
 
-  // Options
-  const [length, setLength] = useState(6);
+  // Options (values used in generate callback)
+  const [length] = useState(6);
   const [pattern, setPattern] = useState<IDPattern>("lucky-combo");
-  const [favoriteNumbers, setFavoriteNumbers] = useState("7,8,9");
-  const [excludeNumbers, setExcludeNumbers] = useState("4");
-  const [includeLetters, setIncludeLetters] = useState(true);
-  const [customName, setCustomName] = useState("");
+  const [favoriteNumbers] = useState("7,8,9");
+  const [excludeNumbers] = useState("4");
+  const [includeLetters] = useState(true);
+  const [customName] = useState("");
   const [bulkCount] = useState(3); // Fixed to 3 results: Perfect, Medium, Low
-  const [numberSuffixLength, setNumberSuffixLength] = useState(2);
-  const [useUppercase, setUseUppercase] = useState(true);
-  const [includeBirthYear, setIncludeBirthYear] = useState(false);
-  const [birthYear, setBirthYear] = useState("");
+  const [numberSuffixLength] = useState(2);
+  const [useUppercase] = useState(true);
+  const [includeBirthYear] = useState(false);
+  const [birthYear] = useState("");
 
   const PATTERNS: { value: IDPattern; label: string; icon: string }[] = [
     { value: "lucky-combo", label: "Lucky Combo", icon: "Naga88" },
@@ -67,7 +55,7 @@ export function IDGenerator() {
     if (!siteName.trim()) return;
 
     if (typeof window !== "undefined" && (window as WindowWithClarity).clarity) {
-      (window as WindowWithClarity).clarity("event", "generate_id_click");
+      (window as WindowWithClarity).clarity!("event", "generate_id_click");
     }
 
     setIsGenerating(true);

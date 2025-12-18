@@ -68,36 +68,6 @@ function generateSeoPages() {
       };
     });
   });
-  const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Apa itu angka keberuntungan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Angka keberuntungan adalah angka yang dipercaya membawa hoki atau rasa percaya diri berdasarkan kebiasaan dan kepercayaan populer."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Apakah angka hoki benar-benar berpengaruh?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Secara ilmiah tidak pasti, namun banyak orang menggunakannya untuk faktor psikologis dan kenyamanan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Bagaimana cara mendapatkan angka hoki?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Gunakan generator angka populer untuk mendapatkan kombinasi yang terlihat rapi dan meyakinkan."
-      }
-    }
-  ]
-};
   return pages;
 }
 
@@ -124,41 +94,6 @@ export default function SeoPage() {
       </div>
     );
   }
-
-  const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Apa itu angka keberuntungan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text":
-          "Angka keberuntungan adalah angka yang dipercaya membawa hoki atau rasa percaya diri berdasarkan kebiasaan dan kepercayaan populer."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Apakah angka hoki benar-benar berpengaruh?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text":
-          "Tidak bersifat pasti, namun banyak orang merasa lebih yakin saat menggunakan angka dengan pola tertentu."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Bagaimana cara mendapatkan angka hoki?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text":
-          "Angka hoki bisa diperoleh dengan generator angka berdasarkan pola populer seperti pengulangan, keseimbangan, dan psikologis."
-      }
-    }
-  ]
-};
-
 
   return (
     <div className="min-h-screen">
