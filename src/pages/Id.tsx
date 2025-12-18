@@ -39,13 +39,7 @@ export default function IndonesianHome() {
       </Helmet>
 
       {/* ================= HREFLANG ================= */}
-      <AutoHreflang
-        canonical="https://www.luckygen.click/id/"
-        alternates={{
-          en: "https://www.luckygen.click/en/",
-          id: "https://www.luckygen.click/id/",
-        }}
-      />
+      <AutoHreflang />
 
       {/* ================= SCHEMA ================= */}
       <PageSchema
@@ -58,11 +52,10 @@ export default function IndonesianHome() {
         name="Generator Lucky ID & Nominal Cantik"
         description="Alat online untuk menghasilkan ID hoki dan nominal saldo cantik populer di Indonesia"
         url="https://www.luckygen.click/id/"
-        inLanguage="id-ID"
       />
 
       <FaqSchema
-        faqs={[
+        items={[
           {
             question: "Apa itu Lucky ID?",
             answer:

@@ -1,15 +1,13 @@
-import { useState, Suspense } from "react";
+import { useState, Suspense, lazy } from "react";
 import { Hash, Banknote } from "lucide-react";
 import { Header } from "@/components/Header";
-import { IDGenerator } from "@/components/IDGenerator";
-import { AmountGenerator } from "@/components/AmountGenerator";
+import IDGenerator from "@/components/IDGenerator";
+import AmountGenerator from "@/components/AmountGenerator";
 import { Disclaimer } from "@/components/Disclaimer";
 import { TipsSection } from "@/components/TipsSection";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import { lazy } from "react";
 import { Link } from "react-router-dom";
 
 const NativeBanner = lazy(() => import("@/components/ads/NativeBanner"));
@@ -18,7 +16,6 @@ type TabType = "id" | "amount";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<TabType>("id");
-  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen">

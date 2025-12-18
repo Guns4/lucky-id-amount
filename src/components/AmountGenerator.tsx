@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { openSmartlink } from "@/lib/smartlink";
 
-export function AmountGenerator() {
+export default function AmountGenerator() {
   const { t } = useLanguage();
 
   const [results, setResults] = useState<GeneratedAmount[]>([]);

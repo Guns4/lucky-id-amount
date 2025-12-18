@@ -38,13 +38,7 @@ export default function EnglishHome() {
         <link rel="canonical" href="https://www.luckygen.click/en/" />
       </Helmet>
 
-      <AutoHreflang
-        canonical="https://www.luckygen.click/en/"
-        alternates={{
-          en: "https://www.luckygen.click/en/",
-          id: "https://www.luckygen.click/id/",
-        }}
-      />
+      <AutoHreflang />
 
       <PageSchema
         name="LuckyGen – Lucky ID & Amount Generator"
@@ -59,7 +53,7 @@ export default function EnglishHome() {
       />
 
       <FaqSchema
-        faqs={[
+        items={[
           {
             question: "What is LuckyGen?",
             answer:

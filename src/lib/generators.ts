@@ -208,7 +208,7 @@ function generateDescendingPattern(length: number, exclude: number[], includeLet
   return result;
 }
 
-function generateMirrorPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
+function generateMirrorPattern(_length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : [1, 2, 3, 5, 6, 7, 8, 9].filter(n => !exclude.includes(n));
@@ -225,7 +225,7 @@ function generateMirrorPattern(length: number, favorites: number[], exclude: num
   return mirrorPart;
 }
 
-function generateDoublePairsPattern(length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
+function generateDoublePairsPattern(_length: number, favorites: number[], exclude: number[], includeLetters: boolean = true, usedNames?: Set<string>): string {
   const available = favorites.length > 0 
     ? favorites.filter(n => !exclude.includes(n))
     : [1, 2, 3, 5, 6, 7, 8, 9].filter(n => !exclude.includes(n));
